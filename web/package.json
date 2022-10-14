@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@pdftron/webviewer": "^8.9.0",
+    "@react-pdf-viewer/core": "^3.7.0",
+    "@react-pdf-viewer/default-layout": "^3.7.0",
+    "pdfjs-dist": "^2.16.105",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
