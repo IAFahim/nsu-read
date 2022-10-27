@@ -1,6 +1,6 @@
 export default function Introduction() {
     return (
-        <>
+        <div>
             <h1>1. Introduction</h1>
             <h2>1.1 Purpose</h2>
             <p>Identify the product whose software requirements are specified in this document, including the revision or release number. Describe the scope of the product that is covered by this SRS, particularly if this SRS describes only part of the system or a single subsystem.</p>
@@ -12,6 +12,6 @@ export default function Introduction() {
             <p>Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals. Relate the software to corporate goals or business strategies. If a separate vision and scope document is available, refer to it rather than duplicating its contents here.</p>
             <h2>1.5 References</h2>
             <p>List any other documents or Web addresses to which this SRS refers. These may include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.</p>
-        </>
+        </div>
     )
 }
