@@ -9,19 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-pdf-viewer/core": "^3.7.0",
-    "@react-pdf-viewer/default-layout": "^3.7.0",
-    "pdfjs-dist": "^2.16.105",
     "next": "13.0.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-pdf": "^5.7.2"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/node": "18.11.7",
-    "@types/react": "18.0.21",
+    "@types/react": "18.0.23",
     "@types/react-dom": "18.0.7",
-    "eslint": "8.25.0",
+    "eslint": "8.26.0",
     "eslint-config-next": "13.0.0",
     "typescript": "4.8.4"
   }
