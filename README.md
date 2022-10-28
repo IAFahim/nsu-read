@@ -1,1 +1,2 @@
-We don't know what to make yet, let see.
+# NSU Read
+[Website](https://nsu-read-iafahim.vercel.app/)
