@@ -1,17 +1,9 @@
-import Introduction from "../components/srs/Introduction";
-import System_Features from "../components/srs/System_Features";
-import Overall_Description from "../components/srs/Overall_Description";
-import External_Interface_Requirements from "../components/srs/External_Interface_Requirements";
-import Hero from "../components/srs/Hero";
+import Link from "next/link";
 
-export default function SRS() {
+export default function Home() {
     return (
-        <div style={{paddingRight:20, paddingLeft:20}}>
-            <Hero/>
-            <Introduction/>
-            <Overall_Description/>
-            <External_Interface_Requirements/>
-            <System_Features/>
+        <div style={{paddingRight: 20, paddingLeft: 20}}>
+            <h1 style={{textAlign:"center"}}>Only SRS is available. <Link href={"/srs"}>SRS</Link></h1>
         </div>
     )
 }

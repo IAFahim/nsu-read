@@ -1,17 +1,30 @@
 export default function Introduction() {
     return (
-        <div>
+        <div id="Introduction">
             <h1>1. Introduction</h1>
             <h2>1.1 Purpose</h2>
-            <p>Identify the product whose software requirements are specified in this document, including the revision or release number. Describe the scope of the product that is covered by this SRS, particularly if this SRS describes only part of the system or a single subsystem.</p>
+            <p>This SRS covers A PDF reading system for a organization as reading task. The product would be used to
+                assign task to reader and its purpose to monitor its user and take quiz by the PDF setter</p>
             <h2>1.2 Document Conventions</h2>
-            <p>Describe any standards or typographical conventions that were followed when writing this SRS, such as fonts or highlighting that have special significance. For example, state whether priorities  for higher-level requirements are assumed to be inherited by detailed requirements, or whether every requirement statement is to have its own priority.</p>
+            <p>The document doesnt follow any conventions. Here every requirement statement is to have its own
+                priority.</p>
             <h2>1.3 Intended Audience and Reading Suggestions</h2>
-            <p>Describe the different types of reader that the document is intended for, such as developers, project managers, marketing staff, users, testers, and documentation writers. Describe what the rest of this SRS contains and how it is organized. Suggest a sequence for reading the document, beginning with the overview sections and proceeding through the sections that are most pertinent to each reader type.</p>
+            <p>This document is mainly written for the Client, Manager, designer, Programmer Tester and End User.</p>
             <h2>1.4 Product Scope</h2>
-            <p>Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals. Relate the software to corporate goals or business strategies. If a separate vision and scope document is available, refer to it rather than duplicating its contents here.</p>
+            <p>In this product PDF setter and PDF reader both can be partake. The PDF setter may set the PDF by
+                uploading it to the site, after that the system would monitor the PDF readers movement View Webcam to
+                vary that the user is paying attention added with on which page of each section the PDF reader is
+                reading the most. Farther more to test the PDF readers attention Quiz maybe taken in written from, MCQ,
+                Fill in the Blanks, Voice assisted question answer. And To maintain groups the PDF reader may task and
+                add groups and individual user together.</p>
             <h2>1.5 References</h2>
-            <p>List any other documents or Web addresses to which this SRS refers. These may include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.</p>
+            <p>
+                User may check <a href="https://nsu-read.vercel.app/srs">this page</a> [https://nsu-read.vercel.app/srs] for any farther update to this document.
+                <br/>
+                Client, Manager, designer, Programmer Tester and End User may benefit form reading this document fully.
+                <br/>
+                End User may benefit from reading <a href="#Overall_Description">Overall Description</a>
+            </p>
         </div>
     )
 }

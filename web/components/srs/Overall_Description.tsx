@@ -1,21 +1,85 @@
+import Image from "next/image";
+
 export default function Overall_Description() {
     return (
-        <div>
+        <div id="Overall_Description">
             <h1>2. Overall Description</h1>
             <h2>2.1 Product Perspective</h2>
-            <p>Describe the context and origin of the product being specified in this SRS. For example, state whether this product is a follow-on member of a product family, a replacement for certain existing systems, or a new, self-contained product. If the SRS defines a component of a larger system, relate the requirements of the larger system to the functionality of this software and identify interfaces between the two. A simple diagram that shows the major components of the overall system, subsystem interconnections, and external interfaces can be helpful</p>
+            <p>
+                This product is replacement of real world monitoring problem of document distribution and making sure
+                the
+                reader follows on, or to identify reading trends amount the users.
+                <br/>
+                <Image src="/problem_without_this_software.png" alt="problem_without_this_software" width={960}
+                       height={416} style={{
+                    marginTop: 10,
+                }}/>
+                <br/>
+                <br/>
+                Assign Material to the user and monitor the user reading habits and take quiz to test the user attention
+                Hard to Monitor if PDF reader is reading, and where is focused most often. And to make sure the user is
+                not cheating the system would be able to monitor the user through webcam.
+                Taking Quiz in person may not be always an option, so this product would be a replacement of that.
+                <br/>
+                This product would be able to monitor the user reading habits and take quiz to test the user attention.
+                <br/>
+                <Image src="/and_with_this_software.png" alt="and_with_this_software.png" width={960}
+                       height={416} style={{
+                    marginTop: 10,
+                }}/>
+                <br/>
+            </p>
             <h2>2.2 Product Functions</h2>
-            <p>Summarize the major functions the product must perform or must let the user perform. Details will be provided in Section 3, so only a high level summary (such as a bullet list) is needed here. Organize the functions to make them understandable to any reader of the SRS. A picture of the major groups of related requirements and how they relate, such as a top level data flow diagram or object class diagram, is often effective.</p>
+            <p>
+                Task this product would be able to do:
+                <ul>
+                    <li>PDF setter may set the PDF by uploading it to the site</li>
+                    <li>PDF reader may read the PDF</li>
+                    <li>PDF reader may add groups and individual user together</li>
+                    <li>PDF reader would be monitored via webcam</li>
+                    <li>PDF reader would know where the reader focused the most, from group and individual</li>
+                    <li>PDF setter may change the PDF</li>
+                    <li>PDF setter may take quiz</li>
+                    <li>PDF reader can give quiz</li>
+                    <li>PDF reader solve the given quiz</li>
+                    <li>PDF setter may view the quiz result</li>
+                    <li>PDF setter may view the PDF reading habits</li>
+
+                </ul>
+            </p>
             <h2>2.3 User Classes and Characteristics</h2>
-            <p>Identify the various user classes that you anticipate will use this product. User classes may be differentiated based on frequency of use, subset of product functions used, technical expertise, security or privilege levels, educational level, or experience. Describe the pertinent characteristics of each user class. Certain requirements may pertain only to certain user classes. Distinguish the most important user classes for this product from those who are less important to satisfy.</p>
+            <p>
+                This product would be used by the PDF setter and PDF reader.
+                <br/>
+                This product would marketed toward Educational Institution, Organization, and Company. where the
+                educational institution would be the PDF setter and the student would be the PDF reader.
+            </p>
             <h2>2.4 Operating Environment</h2>
-            <p>Describe the environment in which the software will operate, including the hardware platform, operating system and versions, and any other software components or applications with which it must peacefully coexist</p>
+            <p>
+                This product would be used in any device with a browser, internet connection, and webcam. In a well-lit
+                room.
+                Also the result of quiz and monitoring data can be viewed in phone as well as browser.
+            </p>
             <h2>2.5 Design and Implementation Constraints</h2>
-            <p>Describe any items or issues that will limit the options available to the developers. These might include: corporate or regulatory policies; hardware limitations (timing requirements, memory requirements); interfaces to other applications; specific technologies, tools, and databases to be used; parallel operations; language requirements; communications protocols; security considerations; design conventions or programming standards (for example, if the customer’s organization will be responsible for maintaining the delivered software).</p>
+            <p>
+                This product would be less effective if user is not in a well lit room, or doesnt have a webcam. And it
+                would martian this <a
+                href="https://www.cdc.gov/phlp/docs/datasharing-laws.pdf">health regulation</a>[https://www.cdc.gov/phlp/docs/datasharing-laws.pdf]
+                of tracking user
+                through webcam.
+            </p>
             <h2>2.6 User Documentation</h2>
-            <p>List the user documentation components (such as user manuals, on-line help, and tutorials) that will be delivered along with the software. Identify any known user documentation delivery formats or standards.</p>
+            <p>
+                User may check <a href="https://nsu-read.vercel.app/tutorial">this
+                page</a> [https://nsu-read.vercel.app/tutorial] for any farther tutorial as its being actively developed
+                and things may change along the way.
+            </p>
             <h2>2.7 Assumptions and Dependencies</h2>
-            <p>List any assumed factors (as opposed to known facts) that could affect the requirements stated in the SRS. These could include third-party or commercial components that you plan to use, issues around the development or operating environment, or constraints. The project could be affected if these assumptions are incorrect, are not shared, or change. Also identify any dependencies the project has on external factors, such as software components that you intend to reuse from another project, unless they are already documented elsewhere (for example, in the vision and scope document or the project plan).</p>
+            <p>
+                This product may use some external API to make the product more effective. This payment and requirement
+                would have to be bared by the client. And father recurse other then the website have to agreed upon both
+                client and the developer.
+            </p>
         </div>
     )
 }
