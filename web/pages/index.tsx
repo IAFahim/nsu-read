@@ -6,12 +6,12 @@ import Hero from "../components/srs/Hero";
 
 export default function SRS() {
     return (
-        <>
+        <div style={{paddingRight:20, paddingLeft:20}}>
             <Hero/>
             <Introduction/>
             <Overall_Description/>
             <External_Interface_Requirements/>
             <System_Features/>
-        </>
+        </div>
     )
 }

@@ -1,10 +1,10 @@
 export default function Hero() {
     return (
-        <div style={{height: "100vh"}}>
+        <div style={{height: "100vh", paddingTop:100, textAlign:"right"}}>
             <h1>Software Requirements Specification</h1>
-            <h2>for</h2>
-            <h1>NSU Read</h1>
-            <code>
+            <h3>for</h3>
+            <h2>NSU-Read</h2>
+            <code style={{position:"absolute",bottom:50, right:20}}>
                 Version 1.0
                 <br/>
                 Prepared by Md. Ishtiaq Ahamed Fahim
