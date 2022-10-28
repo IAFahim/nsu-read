@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Introduction() {
     return (
         <div id="Introduction">
@@ -19,7 +21,7 @@ export default function Introduction() {
                 add groups and individual user together.</p>
             <h2>1.5 References</h2>
             <p>
-                User may check <a href="https://nsu-read.vercel.app/srs">this page</a> [https://nsu-read.vercel.app/srs] for any farther update to this document.
+                User may check <Link href="/srs">this page</Link> [https://nsu-read.vercel.app/srs] for any farther update to this document.
                 <br/>
                 Client, Manager, designer, Programmer Tester and End User may benefit form reading this document fully.
                 <br/>

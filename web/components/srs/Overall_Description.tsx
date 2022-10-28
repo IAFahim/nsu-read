@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Overall_Description() {
     return (
@@ -32,21 +33,21 @@ export default function Overall_Description() {
             <h2>2.2 Product Functions</h2>
             <p>
                 Task this product would be able to do:
-                <ul>
-                    <li>PDF setter may set the PDF by uploading it to the site</li>
-                    <li>PDF reader may read the PDF</li>
-                    <li>PDF reader may add groups and individual user together</li>
-                    <li>PDF reader would be monitored via webcam</li>
-                    <li>PDF reader would know where the reader focused the most, from group and individual</li>
-                    <li>PDF setter may change the PDF</li>
-                    <li>PDF setter may take quiz</li>
-                    <li>PDF reader can give quiz</li>
-                    <li>PDF reader solve the given quiz</li>
-                    <li>PDF setter may view the quiz result</li>
-                    <li>PDF setter may view the PDF reading habits</li>
-
-                </ul>
             </p>
+            <ul>
+                <li>PDF setter may set the PDF by uploading it to the site</li>
+                <li>PDF reader may read the PDF</li>
+                <li>PDF reader may add groups and individual user together</li>
+                <li>PDF reader would be monitored via webcam</li>
+                <li>PDF reader would know where the reader focused the most, from group and individual</li>
+                <li>PDF setter may change the PDF</li>
+                <li>PDF setter may take quiz</li>
+                <li>PDF reader can give quiz</li>
+                <li>PDF reader solve the given quiz</li>
+                <li>PDF setter may view the quiz result</li>
+                <li>PDF setter may view the PDF reading habits</li>
+
+            </ul>
             <h2>2.3 User Classes and Characteristics</h2>
             <p>
                 This product would be used by the PDF setter and PDF reader.
@@ -63,15 +64,15 @@ export default function Overall_Description() {
             <h2>2.5 Design and Implementation Constraints</h2>
             <p>
                 This product would be less effective if user is not in a well lit room, or doesnt have a webcam. And it
-                would martian this <a
-                href="https://www.cdc.gov/phlp/docs/datasharing-laws.pdf">health regulation</a>[https://www.cdc.gov/phlp/docs/datasharing-laws.pdf]
+                would martian this
+                <a href="https://www.cdc.gov/phlp/docs/datasharing-laws.pdf">health regulation</a>[https://www.cdc.gov/phlp/docs/datasharing-laws.pdf]
                 of tracking user
                 through webcam.
             </p>
             <h2>2.6 User Documentation</h2>
             <p>
-                User may check <a href="https://nsu-read.vercel.app/tutorial">this
-                page</a> [https://nsu-read.vercel.app/tutorial] for any farther tutorial as its being actively developed
+                User may check <Link href="/tutorial">this page</Link> [https://nsu-read.vercel.app/tutorial] for any
+                farther tutorial as its being actively developed
                 and things may change along the way.
             </p>
             <h2>2.7 Assumptions and Dependencies</h2>

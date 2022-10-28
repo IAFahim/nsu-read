@@ -2,10 +2,14 @@ export default function System_Features() {
     return (
         <div>
             <h1>4. System Features</h1>
-            <p>This template illustrates organizing the functional requirements for the product by system features, the
-                major services provided by the product. You may prefer to organize this section by use case, mode of
-                operation, user class, object class, functional hierarchy, or combinations of these, whatever makes the
-                most logical sense for your product.</p>
+            <p>
+                <h4>Browser User</h4>
+                <br/>
+
+                <h4>Phone User</h4>
+                <br/>
+
+            </p>
             <h2>4.1 System Feature 1</h2>
             <p>Identify the product whose software requirements are specified in this document, including the revision
                 or release number. Describe the scope of the product that is covered by this SRS, particularly if this
