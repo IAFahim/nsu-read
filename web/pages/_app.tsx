@@ -17,6 +17,22 @@ export default function App(props: AppProps) {
                 withNormalizeCSS
                 theme={{
                     colorScheme: 'light',
+                    globalStyles:theme => {
+                        return {
+                            body: {
+                                fontFamily: theme.fontFamily,
+                                color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+                                backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+                            },
+                            h2:{
+                               marginBottom:0,
+                            },
+                            p:{
+                              marginTop:0,
+                            }
+
+                        };
+                    }
                 }}
 
             >
