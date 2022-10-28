@@ -25,7 +25,7 @@ export default function App(props: AppProps) {
                                 backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
                             },
                             h2:{
-                               marginBottom:0,
+                               marginBottom:theme.spacing.xs,
                             },
                             p:{
                               marginTop:0,
