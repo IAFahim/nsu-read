@@ -1,2 +1,2 @@
 # NSU Read
-[Website](https://nsu-read-iafahim.vercel.app/)
+[Website](https://nsu-read.vercel.app/)
