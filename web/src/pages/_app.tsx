@@ -1,6 +1,8 @@
 import {AppProps} from 'next/app';
 import Head from 'next/head';
-import {MantineProvider} from '@mantine/core';
+import {Header, MantineProvider} from '@mantine/core';
+import Hero from "../components/srs/Hero";
+import {HeaderMantine} from "../components/header/HeaderMantine";
 
 export default function App(props: AppProps) {
     const {Component, pageProps} = props;
@@ -24,8 +26,16 @@ export default function App(props: AppProps) {
                                 color: theme.colorScheme === 'dark' ? theme.white : theme.black,
                                 backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
                             },
+                            h1:{
+                                marginBottom: theme.spacing.xs,
+
+                            },
                             h2:{
-                               marginBottom:theme.spacing.xs,
+                                marginTop: theme.spacing.xs,
+                               marginBottom:10,
+                            },
+                            h3:{
+                                marginTop: theme.spacing.xs,
                             },
                             p:{
                               marginTop:0,
@@ -36,6 +46,7 @@ export default function App(props: AppProps) {
                 }}
 
             >
+                <HeaderMantine/>
                 <Component {...pageProps} />
             </MantineProvider>
         </>
