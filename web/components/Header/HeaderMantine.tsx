@@ -199,7 +199,7 @@ export function HeaderMantine() {
                     <UnstyledButton className={classes.link} onClick={toggleLinks}>
                         <Center inline>
                             <Box component="span" mr={5}>
-                                learn
+                                Learn
                             </Box>
                             <IconChevronDown size={16} color={theme.fn.primaryColor()}/>
                         </Center>
