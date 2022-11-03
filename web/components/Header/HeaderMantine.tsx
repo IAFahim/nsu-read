@@ -121,7 +121,7 @@ export function HeaderMantine() {
 
     const links = mockdata.map((item) => (
         <Link href={item.link} passHref style={{textDecoration: "none"}} key={item.title}>
-            <UnstyledButton className={classes.subLink}>
+            <UnstyledButton className={classes.subLink} onClick={closeDrawer}>
                 <Group noWrap align="flex-start">
                     <ThemeIcon size={34} variant="default" radius="md">
                         <item.icon size={22} color={theme.fn.primaryColor()}/>
