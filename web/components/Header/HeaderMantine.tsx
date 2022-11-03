@@ -144,11 +144,12 @@ export function HeaderMantine() {
             <Header height={60} px="md">
                 <Group position="apart" sx={{height: '100%'}}>
                     <IconLogout size={30}/>
-
-                    <Group sx={{height: '100%'}} spacing={0} className={classes.hiddenMobile}>
-                        <Link href="/" className={classes.link}>
+                    <Group sx={{height: '100%'}} spacing={10} className={classes.hiddenMobile}>
+                        <Box component="span" mr={5} onClick={() => {
+                            router.push("/")
+                        }}>
                             Home
-                        </Link>
+                        </Box>
                         <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
                             <HoverCard.Target>
                                 <Center inline>
@@ -168,9 +169,9 @@ export function HeaderMantine() {
                     </Group>
 
                     <Group className={classes.hiddenMobile}>
-                            <Button onClick={()=> {
-                                router.push("/login")
-                            }} variant="default">Get Started</Button>
+                        <Button onClick={() => {
+                            router.push("/login")
+                        }} variant="default">Get Started</Button>
                     </Group>
 
                     <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop}/>
@@ -189,9 +190,12 @@ export function HeaderMantine() {
             >
                 <ScrollArea sx={{height: 'calc(100vh - 60px)'}} mx="-md">
                     <Divider color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}/>
-                    <Link href="/" className={classes.link} onClick={closeDrawer}>
+                    <Box component="span" mr={5} className={classes.link} onClick={() => {
+                        closeDrawer()
+                        router.push("/")
+                    }}>
                         Home
-                    </Link>
+                    </Box>
                     <UnstyledButton className={classes.link} onClick={toggleLinks}>
                         <Center inline>
                             <Box component="span" mr={5}>

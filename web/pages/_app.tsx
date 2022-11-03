@@ -1,3 +1,4 @@
+import "../styles/globals.css";
 import { useState } from 'react'
 import type { AppProps } from 'next/app'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
@@ -29,7 +30,6 @@ function MyApp({
           colorScheme: 'light',
           globalStyles: theme => {
             return {
-              colorScheme: 'light',
               body: {
                 fontFamily: theme.fontFamily,
                 color: theme.colorScheme === 'dark' ? theme.white : theme.black,
