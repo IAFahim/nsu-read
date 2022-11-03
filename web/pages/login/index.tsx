@@ -3,7 +3,7 @@ import {useSession, useSupabaseClient} from '@supabase/auth-helpers-react'
 import Account from '../../components/Account/Account'
 import {Container} from "@mantine/core";
 
-const Home = () => {
+const Login = () => {
     const session = useSession()
     const supabase = useSupabaseClient()
     return (
@@ -24,4 +24,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Login
