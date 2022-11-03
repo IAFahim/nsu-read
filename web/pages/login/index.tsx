@@ -1,6 +1,6 @@
 import {Auth, ThemeMinimal, ThemeSupa} from '@supabase/auth-ui-react'
 import {useSession, useSupabaseClient} from '@supabase/auth-helpers-react'
-import Account from '../../components/Account/Account'
+import Account from '../../components/Account'
 import {Container} from "@mantine/core";
 
 const Login = () => {
