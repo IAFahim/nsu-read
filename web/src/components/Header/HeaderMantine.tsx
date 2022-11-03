@@ -25,9 +25,12 @@ import {
     IconChartPie3,
     IconFingerprint,
     IconCoin,
-    IconChevronDown, IconLogout,
+    IconChevronDown,
+    IconLogout,
 } from '@tabler/icons';
 import Link from "next/link";
+import {NextResponse} from 'next/server';
+import {useRouter} from "next/router";
 
 const useStyles = createStyles((theme) => ({
     link: {
@@ -94,7 +97,7 @@ const mockdata = [
         icon: IconCode,
         title: 'SRS',
         description: 'This Pokémon’s cry is very loud and distracting',
-        link: '/srs',
+        link: '/SRS',
     },
     {
         icon: IconCoin,
@@ -114,6 +117,7 @@ export function HeaderMantine() {
     const [drawerOpened, {toggle: toggleDrawer, close: closeDrawer}] = useDisclosure(false);
     const [linksOpened, {toggle: toggleLinks}] = useDisclosure(false);
     const {classes, theme} = useStyles();
+    const router = useRouter();
 
     const links = mockdata.map((item) => (
         <Link href={item.link} passHref style={{textDecoration: "none"}} key={item.title}>
@@ -147,12 +151,12 @@ export function HeaderMantine() {
                         </Link>
                         <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
                             <HoverCard.Target>
-                                    <Center inline>
-                                        <Box component="span" mr={5}>
-                                            Learn
-                                        </Box>
-                                        <IconChevronDown size={16} color={theme.fn.primaryColor()}/>
-                                    </Center>
+                                <Center inline>
+                                    <Box component="span" mr={5}>
+                                        Learn
+                                    </Box>
+                                    <IconChevronDown size={16} color={theme.fn.primaryColor()}/>
+                                </Center>
                             </HoverCard.Target>
 
                             <HoverCard.Dropdown sx={{overflow: 'hidden'}} onClick={closeDrawer}>
@@ -164,8 +168,9 @@ export function HeaderMantine() {
                     </Group>
 
                     <Group className={classes.hiddenMobile}>
-                        <Button variant="default">Log in</Button>
-                        <Button>Sign up</Button>
+                            <Button onClick={()=> {
+                                router.push("/login")
+                            }} variant="default">Get Started</Button>
                     </Group>
 
                     <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop}/>
@@ -199,8 +204,10 @@ export function HeaderMantine() {
                     <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}/>
 
                     <Group position="center" grow pb="xl" px="md">
-                        <Button variant="default">Log in</Button>
-                        <Button>Sign up</Button>
+                        <Button onClick={() => {
+                            router.push("/login");
+                            closeDrawer();
+                        }} variant="default">Get Started</Button>
                     </Group>
                 </ScrollArea>
             </Drawer>

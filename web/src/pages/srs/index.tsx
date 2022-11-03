@@ -1,8 +1,8 @@
-import Hero from "../../components/srs/Hero";
-import Introduction from "../../components/srs/Introduction";
-import Overall_Description from "../../components/srs/Overall_Description";
-import External_Interface_Requirements from "../../components/srs/External_Interface_Requirements";
-import System_Features from "../../components/srs/System_Features";
+import Hero from "../../components/SRS/Hero";
+import Introduction from "../../components/SRS/Introduction";
+import Overall_Description from "../../components/SRS/Overall_Description";
+import External_Interface_Requirements from "../../components/SRS/External_Interface_Requirements";
+import System_Features from "../../components/SRS/System_Features";
 
 export default function SRS() {
     return (

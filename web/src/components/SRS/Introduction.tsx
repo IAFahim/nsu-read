@@ -25,7 +25,7 @@ export default function Introduction() {
                 <br/>
                 Client, Manager, designer, Programmer Tester and End User may benefit form reading this document fully.
                 <br/>
-                End User may benefit from reading <a href="src/components/srs/Introduction#Overall_Description">Overall Description</a>
+                End User may benefit from reading <a href="src/components/SRS/Introduction#Overall_Description">Overall Description</a>
             </p>
         </div>
     )
