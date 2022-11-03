@@ -26,7 +26,7 @@ import {
     IconFingerprint,
     IconCoin,
     IconChevronDown,
-    IconLogout,
+    IconLogout, IconHelp, IconRelationOneToMany,
 } from '@tabler/icons';
 import Link from "next/link";
 import {NextResponse} from 'next/server';
@@ -96,19 +96,19 @@ const mockdata = [
     {
         icon: IconCode,
         title: 'SRS',
-        description: 'This Pokémon’s cry is very loud and distracting',
-        link: '/SRS',
+        description: 'The SRS system is a spaced repetition system that helps you learn faster and more efficiently.',
+        link: '/srs',
     },
     {
-        icon: IconCoin,
+        icon: IconHelp,
         title: 'Tutorial',
-        description: 'The fluid of Smeargle’s tail secretions changes',
+        description: 'Learn how to use the NSU-Read system and how to get the most out of it.',
         link: '/tutorial',
     },
     {
-        icon: IconBook,
+        icon: IconRelationOneToMany,
         title: 'UML Diagram',
-        description: 'Yanma is capable of seeing 360 degrees without',
+        description: 'Understand the UML diagram and how it is used to create a database.',
         link: "/"
     },
 ];
