@@ -2,7 +2,6 @@ import type { NextPage } from 'next'
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react'
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import Account from '../components/Account'
-import Footer from '../components/Footer'
 
 const Home: NextPage = () => {
   const session = useSession()
@@ -29,8 +28,6 @@ const Home: NextPage = () => {
           <Account session={session} />
         </>
       )}
-
-      <Footer />
     </div>
   )
 }

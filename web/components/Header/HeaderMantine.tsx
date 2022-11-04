@@ -120,23 +120,24 @@ export function HeaderMantine() {
     const router = useRouter();
 
     const links = mockdata.map((item) => (
-        <Link href={item.link} passHref style={{textDecoration: "none"}} key={item.title}>
-            <UnstyledButton className={classes.subLink} onClick={closeDrawer}>
-                <Group noWrap align="flex-start">
-                    <ThemeIcon size={34} variant="default" radius="md">
-                        <item.icon size={22} color={theme.fn.primaryColor()}/>
-                    </ThemeIcon>
-                    <div>
-                        <Text size="sm" weight={500}>
-                            {item.title}
-                        </Text>
-                        <Text size="xs" color="dimmed">
-                            {item.description}
-                        </Text>
-                    </div>
-                </Group>
-            </UnstyledButton>
-        </Link>
+
+        <UnstyledButton key={item.title} className={classes.subLink} onClick={() => {
+            router.push(item.link).then(closeDrawer);
+        }}>
+            <Group noWrap align="flex-start">
+                <ThemeIcon size={34} variant="default" radius="md">
+                    <item.icon size={22} color={theme.fn.primaryColor()}/>
+                </ThemeIcon>
+                <div>
+                    <Text size="sm" weight={500}>
+                        {item.title}
+                    </Text>
+                    <Text size="xs" color="dimmed">
+                        {item.description}
+                    </Text>
+                </div>
+            </Group>
+        </UnstyledButton>
     ));
 
     return (
@@ -144,15 +145,15 @@ export function HeaderMantine() {
             <Header height={60} px="md">
                 <Group position="apart" sx={{height: '100%'}}>
                     <IconLogout size={30}/>
-                    <Group sx={{height: '100%'}} spacing={10} className={classes.hiddenMobile}>
-                        <Box component="span" mr={5} onClick={() => {
+                    <Group sx={{height: '100%'}} spacing={0} className={classes.hiddenMobile}>
+                        <Box className={classes.link} component="span" mr={5} onClick={() => {
                             router.push("/")
                         }}>
                             Home
                         </Box>
-                        <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
-                            <HoverCard.Target>
-                                <Center inline>
+                        <HoverCard  width={600} position="bottom" radius="md" shadow="md" withinPortal>
+                            <HoverCard.Target >
+                                <Center inline className={classes.link} >
                                     <Box component="span" mr={5}>
                                         Learn
                                     </Box>
@@ -191,8 +192,7 @@ export function HeaderMantine() {
                 <ScrollArea sx={{height: 'calc(100vh - 60px)'}} mx="-md">
                     <Divider color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}/>
                     <Box component="span" mr={5} className={classes.link} onClick={() => {
-                        closeDrawer()
-                        router.push("/")
+                        router.push("/").then(closeDrawer);
                     }}>
                         Home
                     </Box>
@@ -209,8 +209,7 @@ export function HeaderMantine() {
 
                     <Group position="center" grow pb="xl" px="md">
                         <Button onClick={() => {
-                            router.push("/login");
-                            closeDrawer();
+                            router.push("/login").then(closeDrawer);
                         }} variant="default">Get Started</Button>
                     </Group>
                 </ScrollArea>
