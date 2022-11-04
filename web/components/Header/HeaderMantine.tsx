@@ -1,36 +1,35 @@
 import {
-    createStyles,
-    Header,
-    HoverCard,
-    Group,
-    Button,
-    UnstyledButton,
-    Text,
-    SimpleGrid,
-    ThemeIcon,
-    Anchor,
-    Divider,
-    Center,
     Box,
     Burger,
-    Drawer,
+    Button,
+    Center,
     Collapse,
+    createStyles,
+    Divider,
+    Drawer,
+    Group,
+    Header,
+    HoverCard,
     ScrollArea,
+    SimpleGrid,
+    Text,
+    ThemeIcon,
+    Title,
+    UnstyledButton,
 } from '@mantine/core';
 import {useDisclosure} from '@mantine/hooks';
-import {
-    IconNotification,
-    IconCode,
-    IconBook,
-    IconChartPie3,
-    IconFingerprint,
-    IconCoin,
-    IconChevronDown,
-    IconLogout, IconHelp, IconRelationOneToMany,
-} from '@tabler/icons';
-import Link from "next/link";
-import {NextResponse} from 'next/server';
+import {IconChevronDown, IconCode, IconHelp, IconRelationOneToMany,} from '@tabler/icons';
 import {useRouter} from "next/router";
+import NSUReadLogo from "./NSUReadLogo.svg";
+import Image from "next/image";
+import {Auth} from "@supabase/auth-ui-react";
+import {useSession, useSupabaseClient} from '@supabase/auth-helpers-react'
+import {Database} from "../../utils/database.types";
+import {supabase} from "@supabase/auth-ui-react/dist/cjs/common/theming";
+import {useEffect, useState} from "react";
+
+type Profiles = Database['public']['Tables']['profiles']['Row']
+
 
 const useStyles = createStyles((theme) => ({
     link: {
@@ -118,6 +117,8 @@ export function HeaderMantine() {
     const [linksOpened, {toggle: toggleLinks}] = useDisclosure(false);
     const {classes, theme} = useStyles();
     const router = useRouter();
+    const session = useSession()
+    const supabase = useSupabaseClient<Database>();
 
     const links = mockdata.map((item) => (
 
@@ -140,20 +141,40 @@ export function HeaderMantine() {
         </UnstyledButton>
     ));
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        setIsLoggedIn(session == null);
+    }, [session]);
+
+    const toggleLogin = () => {
+        if (session) {
+            router.push("/")
+            supabase.auth.signOut()
+            setIsLoggedIn(false);
+        } else {
+            router.push("/login")
+            setIsLoggedIn(true);
+        }
+    }
+
     return (
         <Box>
             <Header height={60} px="md">
                 <Group position="apart" sx={{height: '100%'}}>
-                    <IconLogout size={30}/>
+                    <Center inline style={{userSelect: "none"}}>
+                        <Image src={NSUReadLogo} height={30} width={30}/>
+                        <Title>SU-Read</Title>
+                    </Center>
                     <Group sx={{height: '100%'}} spacing={0} className={classes.hiddenMobile}>
                         <Box className={classes.link} component="span" mr={5} onClick={() => {
                             router.push("/")
                         }}>
                             Home
                         </Box>
-                        <HoverCard  width={600} position="bottom" radius="md" shadow="md" withinPortal>
-                            <HoverCard.Target >
-                                <Center inline className={classes.link} >
+                        <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
+                            <HoverCard.Target>
+                                <Center inline className={classes.link}>
                                     <Box component="span" mr={5}>
                                         Learn
                                     </Box>
@@ -171,8 +192,9 @@ export function HeaderMantine() {
 
                     <Group className={classes.hiddenMobile}>
                         <Button onClick={() => {
-                            router.push("/login")
-                        }} variant="default">Get Started</Button>
+                            toggleLogin()
+                        }} variant={isLoggedIn ? "filled" : "default"}
+                                color="dark">{isLoggedIn ? "Get Started" : "Logout"}</Button>
                     </Group>
 
                     <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop}/>
@@ -209,8 +231,10 @@ export function HeaderMantine() {
 
                     <Group position="center" grow pb="xl" px="md">
                         <Button onClick={() => {
-                            router.push("/login").then(closeDrawer);
-                        }} variant="default">Get Started</Button>
+                            toggleLogin();
+                            closeDrawer();
+                        }} variant={isLoggedIn ? "filled" : "default"}
+                                color="dark">{isLoggedIn ? "Get Started" : "Logout"}</Button>
                     </Group>
                 </ScrollArea>
             </Drawer>
