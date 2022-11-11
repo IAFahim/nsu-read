@@ -18,7 +18,7 @@ export default function Overall_Description() {
                 <br/>
                 <br/>
                 Assign Material to the user and monitor the user reading habits and take quiz to test the user attention
-                Hard to Monitor if PDF reader is reading, and where is focused most often. And to make sure the user is
+                Hard to Monitor if Document reader is reading, and where is focused most often. And to make sure the user is
                 not cheating the system would be able to monitor the user through webcam.
                 Taking Quiz in person may not be always an option, so this product would be a replacement of that.
                 <br/>
@@ -35,25 +35,25 @@ export default function Overall_Description() {
                 Task this product would be able to do:
             </p>
             <ul>
-                <li>PDF setter may set the PDF by uploading it to the site</li>
-                <li>PDF reader may read the PDF</li>
-                <li>PDF reader may add groups and individual user together</li>
-                <li>PDF reader would be monitored via webcam</li>
-                <li>PDF reader would know where the reader focused the most, from group and individual</li>
-                <li>PDF setter may change the PDF</li>
-                <li>PDF setter may take quiz</li>
-                <li>PDF reader can give quiz</li>
-                <li>PDF reader solve the given quiz</li>
-                <li>PDF setter may view the quiz result</li>
-                <li>PDF setter may view the PDF reading habits</li>
+                <li>Document setter may set the Document by uploading it to the site</li>
+                <li>Document reader may read the Document</li>
+                <li>Document reader may add groups and individual user together</li>
+                <li>Document reader would be monitored via webcam</li>
+                <li>Document reader would know where the reader focused the most, from group and individual</li>
+                <li>Document setter may change the Document</li>
+                <li>Document setter may take quiz</li>
+                <li>Document reader can give quiz</li>
+                <li>Document reader solve the given quiz</li>
+                <li>Document setter may view the quiz result</li>
+                <li>Document setter may view the Document reading habits</li>
 
             </ul>
             <h2>2.3 User Classes and Characteristics</h2>
             <p>
-                This product would be used by the PDF setter and PDF reader.
+                This product would be used by the Document setter and Document reader.
                 <br/>
                 This product would marketed toward Educational Institution, Organization, and Company. where the
-                educational institution would be the PDF setter and the student would be the PDF reader.
+                educational institution would be the Document setter and the student would be the Document reader.
             </p>
             <h2>2.4 Operating Environment</h2>
             <p>
@@ -64,8 +64,8 @@ export default function Overall_Description() {
             <h2>2.5 Design and Implementation Constraints</h2>
             <p>
                 This product would be less effective if user is not in a well lit room, or doesnt have a webcam. And it
-                would martian this
-                <a href="https://www.cdc.gov/phlp/docs/datasharing-laws.pdf">health regulation</a>[https://www.cdc.gov/phlp/docs/datasharing-laws.pdf]
+                would maintain this Guideline:
+                <a href="https://www.cdc.gov/phlp/docs/datasharing-laws.Document"> health regulation</a>[https://www.cdc.gov/phlp/docs/datasharing-laws.Document]
                 of tracking user
                 through webcam.
             </p>
@@ -77,9 +77,7 @@ export default function Overall_Description() {
             </p>
             <h2>2.7 Assumptions and Dependencies</h2>
             <p>
-                This product may use some external API to make the product more effective. This payment and requirement
-                would have to be bared by the client. And father recurse other then the website have to agreed upon both
-                client and the developer.
+                This product may use some external API to make the product more effective. For API payment and for the needed requirement  would have to be bared by the client. And father recurse other then the website have to agreed upon both client and the developer.
             </p>
         </div>
     )

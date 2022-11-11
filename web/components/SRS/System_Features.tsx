@@ -9,7 +9,7 @@ export default function System_Features() {
                 <li>Login</li>
                 <li>View the list of project</li>
                 <li>Create a reading project</li>
-                <li>Set/Read PDF</li>
+                <li>Set/Read Document</li>
                 <li>Readers gets monitored with there consent for statistical data</li>
                 <li>View Readers statistical data</li>
                 <li>Set/Participate in quiz</li>
@@ -46,7 +46,7 @@ export default function System_Features() {
             </dl>
             <h2>4.4 Create a reading project</h2>
             <dl>
-                <dt><b>4.4.1</b> Create A reading project with (optional PDF)</dt>
+                <dt><b>4.4.1</b> Create A reading project with Document</dt>
                 <dt><b>4.4.2</b> Project can be totally empty</dt>
                 <dt><b>4.4.3</b> Unlisted user can only view the project structures and description</dt>
                 <dt><b>4.4.4</b> Project can be set to private</dt>
@@ -54,10 +54,10 @@ export default function System_Features() {
                 <dd><b>Functional Requirements</b></dd>
                 <dd><code>REQ-1: Need to be logged in</code><br/></dd>
             </dl>
-            <h2>4.5 Set/Read PDF</h2>
+            <h2>4.5 Set/Read Document</h2>
             <dl>
-                <dt><b>4.5.1</b> Set PDF by uploading the PDF</dt>
-                <dt><b>4.5.2</b> Read PDF</dt>
+                <dt><b>4.5.1</b> Set Document by uploading the Document</dt>
+                <dt><b>4.5.2</b> Read Document</dt>
                 <dd><b>Functional Requirements</b></dd>
                 <dd><code>REQ-1: Need to be logged in</code><br/></dd>
                 <dd><code>REQ-2: Need to be a member of the project</code><br/></dd>
