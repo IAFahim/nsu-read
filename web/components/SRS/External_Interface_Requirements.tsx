@@ -23,9 +23,7 @@ export default function External_Interface_Requirements() {
                 <br/>
                 Frontend: React.js
                 <br/>
-                Backend: Express.js
-                <br/>
-                WebRTC: WebRTC
+                Backend: Supabase
                 <br/>
                 Websocket: Socket.io
                 <br/>
