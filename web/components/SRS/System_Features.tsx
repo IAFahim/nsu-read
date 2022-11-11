@@ -49,7 +49,7 @@ export default function System_Features() {
                 <dt><b>4.4.1</b> Create A reading project with Document</dt>
                 <dt><b>4.4.2</b> Project can be totally empty</dt>
                 <dt><b>4.4.3</b> Unlisted user can only view the project structures and description</dt>
-                <dt><b>4.4.4</b> Project can be set to private</dt>
+                <dt><b>4.4.4</b> Project can be set to unlisted</dt>
                 <dt><b>4.4.5</b> Project can be set to public</dt>
                 <dd><b>Functional Requirements</b></dd>
                 <dd><code>REQ-1: Need to be logged in</code><br/></dd>
