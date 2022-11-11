@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function Other_Nonfunctional_Requirements() {
     return (
         <div id="Other_Nonfunctional_Requirements">

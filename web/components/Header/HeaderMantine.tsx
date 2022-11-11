@@ -22,10 +22,8 @@ import {IconChevronDown, IconCode, IconHelp, IconRelationOneToMany,} from '@tabl
 import {useRouter} from "next/router";
 import NSUReadLogo from "./NSUReadLogo.svg";
 import Image from "next/image";
-import {Auth} from "@supabase/auth-ui-react";
 import {useSession, useSupabaseClient} from '@supabase/auth-helpers-react'
 import {Database} from "../../utils/database.types";
-import {supabase} from "@supabase/auth-ui-react/dist/cjs/common/theming";
 import {useEffect, useState} from "react";
 
 type Profiles = Database['public']['Tables']['profiles']['Row']

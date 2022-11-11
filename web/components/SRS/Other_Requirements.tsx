@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function Other_Requirements() {
     return (
         <div id="Other_Requirements">
