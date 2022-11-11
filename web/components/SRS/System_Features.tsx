@@ -1,6 +1,6 @@
 export default function System_Features() {
     return (
-        <div>
+        <div id="System_Features">
             <h1>4. System Features</h1>
 
             <h4>Browser User</h4>
@@ -10,8 +10,8 @@ export default function System_Features() {
                 <li>View the list of project</li>
                 <li>Create a reading project</li>
                 <li>Set/Read Document</li>
-                <li>Readers gets monitored with there consent for statistical data</li>
-                <li>View Readers statistical data</li>
+                <li>Readers gets monitored with their consent for statistical data</li>
+                <li>View Reader's statistical data</li>
                 <li>Set/Participate in quiz</li>
                 <li>See quiz result, modify answer, publish marks</li>
             </ul>
@@ -20,7 +20,7 @@ export default function System_Features() {
                 <li>Create an account</li>
                 <li>Login</li>
                 <li>View the list of project</li>
-                <li>View Readers statistical data</li>
+                <li>View Reader's statistical data</li>
                 <li>See quiz result</li>
             </ul>
 
@@ -29,7 +29,7 @@ export default function System_Features() {
             <h2>4.1 Create an account</h2>
             <dl>
                 <dt><b>4.1.1</b> Create account with Google Auth</dt>
-                <dt><b>4.1.2</b> Set User Name, Profile Picture, Organization</dt>
+                <dt><b>4.1.2</b> Set Username, Profile Picture, Organization Functional</dt>
                 <dd><b>Functional Requirements</b></dd>
                 <dd><code>REQ-1: Need to have a google Account to login</code><br/></dd>
             </dl>
@@ -62,9 +62,8 @@ export default function System_Features() {
                 <dd><code>REQ-1: Need to be logged in</code><br/></dd>
                 <dd><code>REQ-2: Need to be a member of the project</code><br/></dd>
             </dl>
-            <h2>4.6 Readers gets monitored with there consent for statistical data</h2>
+            <h2>4.6 Readers gets monitored with their consent for statistical data</h2>
             <dl>
-                <dt><b>4.6.1</b> Readers gets monitored with there consent for statistical data</dt>
                 <dd><b>Functional Requirements</b></dd>
                 <dd><code>REQ-1: Need to be logged in</code><br/></dd>
                 <dd><code>REQ-2: Need to be a member of the project</code><br/></dd>
@@ -73,7 +72,6 @@ export default function System_Features() {
             </dl>
             <h2>4.7 View Readers statistical data</h2>
             <dl>
-                <dt><b>4.7.1</b> View Readers statistical data</dt>
                 <dd><b>Functional Requirements</b></dd>
                 <dd><code>REQ-1: Need to be logged in</code><br/></dd>
                 <dd><code>REQ-2: Need to be a owner of the project</code><br/></dd>

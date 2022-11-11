@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function External_Interface_Requirements() {
     return (
-        <div>
+        <div id="External_Interface_Requirements">
             <h1>3. External Interface Requirements</h1>
             <h2>3.1 User Interfaces</h2>
             <p>
@@ -11,9 +11,7 @@ export default function External_Interface_Requirements() {
             </p>
             <h2>3.2 Hardware Interfaces</h2>
             <p>
-                The system will be able to run on any device that can run a modern web browser. The website would use
-                Rest API to communicate with the server over http. And would use SQL data base to store data. The
-                website would use webcam to monitor the user.
+                The system will be able to run on any device that can run a modern web browser. The website would use Rest API to communicate with the server over HTTP. And would use SQL database to store data. The website would use a webcam to monitor the user.
             </p>
             <h2>3.3 Software Interfaces</h2>
             <p>

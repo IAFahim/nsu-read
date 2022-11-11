@@ -1,6 +1,6 @@
 export default function Hero() {
     return (
-        <div style={{height: "90vh", textAlign:"right"}}>
+        <div style={{height: "90vh", textAlign:"right"}} id="Hero">
             <h1>Software Requirements Specification</h1>
             <h3>for</h3>
             <h2>NSU-Read</h2>
