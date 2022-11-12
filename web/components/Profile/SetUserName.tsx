@@ -1,11 +1,16 @@
-import {Button, Container, Flex, Input, TextInput, Tooltip} from "@mantine/core";
-import {IconAt, IconSend} from "@tabler/icons";
+import {Button, Container, Flex, Input, TextInput, Tooltip, useMantineTheme} from "@mantine/core";
+import {IconArrowLeft, IconArrowRight, IconAt, IconSend} from "@tabler/icons";
 import {Database} from "../../utils/database.types";
-import {JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, useRef, useState} from "react";
+import {JSXElementConstructor, ReactElement, ReactFragment, ReactNode, ReactPortal, useRef, useState} from "react";
 import {useSession, useSupabaseClient} from "@supabase/auth-helpers-react";
 import {useRouter} from "next/router";
 
 type Profiles = Database['public']['Tables']['profiles']['Row']
+
+function ActionIcon(props: { size: number, variant: string, radius: string, children: ReactNode }) {
+    return null;
+}
+
 export default function SetUserName({profile}: { profile: Profiles }) {
     const [focused, setFocused] = useState(false);
     const ref = useRef<HTMLInputElement>(null);
@@ -24,15 +29,15 @@ export default function SetUserName({profile}: { profile: Profiles }) {
         }
         console.log('data', data)
     }
-
+    const theme = useMantineTheme();
     return (
         <div id="SetUserName">
             <Flex pt={"xl"} align={"flex-end"} justify={"center"}>
                 <TextInput ref={ref}
                            label="Our dev is so Bad that you can't continue without a username"
                            size={"xl"}
-                           description={"Please enter a username Like " + profile?.full_name}
-                           placeholder="Focus me to see tooltip"
+                           description={"Please enter a username Like: " + profile?.full_name}
+                           placeholder="Username"
                            onFocus={() => setFocused(true)}
                            icon={<IconAt/>}
                            onBlur={() => setFocused(false)}
@@ -43,7 +48,7 @@ export default function SetUserName({profile}: { profile: Profiles }) {
                                </Tooltip>
                            )}
                 />
-                <Button leftIcon={<IconSend/>} ml={"xl"} size={"xl"} onClick={() => {
+                <Button leftIcon={<IconSend/>} mb={2} ml={"xl"} size={"xl"} onClick={() => {
                     updateUsername()
                 }}>Submit</Button>
             </Flex>

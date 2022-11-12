@@ -148,6 +148,7 @@ export function HeaderMantine() {
     const toggleLogin = () => {
         if (session) {
             router.push("/")
+            localStorage.setItem("loggedIn", "false");
             supabase.auth.signOut()
             setIsLoggedIn(false);
         } else {

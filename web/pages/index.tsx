@@ -3,12 +3,12 @@ import {useSession, useSupabaseClient} from '@supabase/auth-helpers-react'
 import Account from "./[username]";
 import SRS from './srs';
 import {Database} from "../utils/database.types";
+import {useEffect, useState} from "react";
 
 
 const Home: NextPage = () => {
     const session = useSession()
     const supabase = useSupabaseClient<Database>()
-
 
     return (
         session ? <Account/> : <SRS/>

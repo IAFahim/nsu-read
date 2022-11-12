@@ -20,10 +20,6 @@ export default function Account() {
     const lock = useRef(true);
 
     useEffect(() => {
-        if (!router.isReady) {
-            return;
-        }
-
         async function fetchProfile() {
             if (lock.current) {
                 lock.current = false;
@@ -36,11 +32,12 @@ export default function Account() {
         }
 
         fetchProfile();
-    }, [router.isReady, session])
+    }, [session])
 
     return (
         <>
-            {profile?.username == null ? <SetUserName profile={profile as Profiles}/> : <Profile profile={profile as Profiles}/>}
+            {!lock && session && profile?.username==null && <SetUserName profile={profile as Profiles}/>}
+            <Profile profile={profile as Profiles}/>
         </>
     )
 }
