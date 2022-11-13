@@ -25,6 +25,7 @@ import Image from "next/image";
 import {useSession, useSupabaseClient} from '@supabase/auth-helpers-react'
 import {Database} from "../../utils/database.types";
 import {useEffect, useState} from "react";
+import useLoginState from "../../store/UseLoginState";
 
 type Profiles = Database['public']['Tables']['profiles']['Row']
 
@@ -139,21 +140,22 @@ export function HeaderMantine() {
         </UnstyledButton>
     ));
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const isLoggedIn = useLoginState(state => state.isLoggedIn);
+    const SetLoggedIn = useLoginState(state => state.SetLoggedIn);
 
     useEffect(() => {
-        setIsLoggedIn(session == null);
+        SetLoggedIn(session != null);
     }, [session]);
 
     const toggleLogin = () => {
         if (session) {
-            router.push("/")
-            localStorage.setItem("loggedIn", "false");
-            supabase.auth.signOut()
-            setIsLoggedIn(false);
+            router.push("/").then(() => {
+                supabase.auth.signOut().then(() => {
+                    SetLoggedIn(false);
+                });
+            })
         } else {
             router.push("/login")
-            setIsLoggedIn(true);
         }
     }
 
@@ -192,8 +194,8 @@ export function HeaderMantine() {
                     <Group className={classes.hiddenMobile}>
                         <Button onClick={() => {
                             toggleLogin()
-                        }} variant={isLoggedIn ? "filled" : "default"}
-                                color="dark">{isLoggedIn ? "Get Started" : "Logout"}</Button>
+                        }} variant={!isLoggedIn ? "filled" : "default"}
+                                color="dark">{!isLoggedIn ? "Get Started" : "Logout"}</Button>
                     </Group>
 
                     <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop}/>
@@ -232,8 +234,8 @@ export function HeaderMantine() {
                         <Button onClick={() => {
                             toggleLogin();
                             closeDrawer();
-                        }} variant={isLoggedIn ? "filled" : "default"}
-                                color="dark">{isLoggedIn ? "Get Started" : "Logout"}</Button>
+                        }} variant={!isLoggedIn ? "filled" : "default"}
+                                color="dark">{!isLoggedIn ? "Get Started" : "Logout"}</Button>
                     </Group>
                 </ScrollArea>
             </Drawer>

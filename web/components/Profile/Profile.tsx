@@ -1,26 +1,56 @@
-import {Avatar, Flex, Title, Text, Grid, Container} from "@mantine/core";
+import {Avatar, Flex, Title, Text, Grid, Container, Image, createStyles, Divider} from "@mantine/core";
 import {Database} from "../../utils/database.types";
-import {IconCone} from "@tabler/icons";
+import {IconCone, IconUser} from "@tabler/icons";
 import ProjectSearchList from "./ProjectSearchList";
+import {useTheme} from "@emotion/react";
 
 type Profiles = Database['public']['Tables']['profiles']['Row']
+const useStyles = createStyles((theme) => ({
+    ProfilePicture: {
+        width: 256,
+        height: 256,
+        maxWidth: 256,
+        borderRadius: 50,
+        flexShrink: 0,
+        [theme.fn.smallerThan("md")]: {
+            width: 140,
+            height: 140,
+            maxWidth: 140,
+        }
+    },
+    ProfileContainer: {
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        [theme.fn.smallerThan("md")]: {
+            flexDirection: "column",
+        }
+    },
+
+    ProfilePicText: {
+        flexDirection: "column",
+        [theme.fn.smallerThan("md")]: {
+            flexDirection: "row",
+        }
+    }
+
+}));
 export default function Profile({profile}: { profile: Profiles }) {
+    const {classes, theme} = useStyles();
     return (
         <>
-            <Grid p={"xl"}>
-                <Grid.Col span={4}>
-                    <Flex>
-                        <Avatar variant={"gradient"} size={"xl"} src={profile?.avatar_url} alt="profile logo"/>
-                        <Flex direction={"column"} pl={"xl"}>
-                            <Title>{profile?.username}</Title>
-                            <Text color={"dimmed"}>{profile?.full_name}</Text>
-                        </Flex>
+            <Flex pt={"sm"} className={classes.ProfileContainer}>
+                <Flex className={classes.ProfilePicText}>
+                    <Image placeholder={<IconUser/>} className={classes.ProfilePicture} src={profile?.avatar_url}
+                           alt="profile logo"/>
+                    <Flex direction={"column"}>
+                        <Title>{profile?.username}</Title>
+                        <Text size={"sm"} color={"dimmed"}>{profile?.full_name}</Text>
                     </Flex>
-                </Grid.Col>
-                <Grid.Col span={8}>
-                    <ProjectSearchList/>
-                </Grid.Col>
-            </Grid>
+
+                </Flex>
+                <ProjectSearchList/>
+
+            </Flex>
         </>
     )
 }

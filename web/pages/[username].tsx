@@ -1,13 +1,10 @@
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useRef} from 'react'
 import {useSession, useSupabaseClient, useUser} from '@supabase/auth-helpers-react'
 import {Database} from '../utils/database.types'
 import {useRouter} from 'next/router';
-import {GetServerSideProps} from "next";
-import {ImageIcon} from "@mantine/core/lib/Image/ImageIcon";
-import {Avatar, Image} from "@mantine/core";
-import {AvatarGroup} from "@mantine/core/lib/Avatar/AvatarGroup/AvatarGroup";
 import SetUserName from "../components/Profile/SetUserName";
 import Profile from "../components/Profile/Profile";
+import useLoginState from "../store/UseLoginState";
 
 type Profiles = Database['public']['Tables']['profiles']['Row']
 
@@ -15,7 +12,8 @@ export default function Account() {
     const supabase = useSupabaseClient<Database>()
     const session = useSession()
     const user = useUser()
-    const [profile, setProfile] = useState<Profiles | null>(null)
+    const SetProfile=useLoginState(state=>state.SetProfiles);
+    const profile=useLoginState(state=>state.profiles);
     const router = useRouter();
     const lock = useRef(true);
 
@@ -25,7 +23,7 @@ export default function Account() {
                 lock.current = false;
                 const data = await supabase.from("profiles").select("*").eq("id", session?.user?.id).single()
                 if (data.data) {
-                    setProfile(data.data);
+                    SetProfile(data.data)
                 }
                 console.log('data', data.data)
             }
