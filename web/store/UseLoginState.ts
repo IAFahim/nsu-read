@@ -1,8 +1,6 @@
 import create from "zustand"
 import {persist} from "zustand/middleware";
 import {Database} from "../utils/database.types";
-import {NextRouter, Router} from "next/router";
-import {useSupabaseClient} from "@supabase/auth-helpers-react";
 
 type Profiles = Database['public']['Tables']['profiles']['Row']
 

@@ -1,10 +1,10 @@
 import {useEffect, useRef} from 'react'
 import {useSession, useSupabaseClient, useUser} from '@supabase/auth-helpers-react'
-import {Database} from '../utils/database.types'
+import {Database} from '../../utils/database.types'
 import {useRouter} from 'next/router';
-import SetUserName from "../components/Profile/SetUserName";
-import Profile from "../components/Profile/Profile";
-import useLoginState from "../store/UseLoginState";
+import SetUserName from "../../components/Profile/SetUserName";
+import Profile from "../../components/Profile/Profile";
+import useLoginState from "../../store/UseLoginState";
 
 type Profiles = Database['public']['Tables']['profiles']['Row']
 
