@@ -1,10 +1,13 @@
 import {useState, useRef} from 'react';
-import {Autocomplete, Button, createStyles, Divider, Flex, Grid, Loader, Select} from '@mantine/core';
+import {Autocomplete, Button, createStyles, Divider, Flex, Grid, Input, Loader, Select} from '@mantine/core';
+import useProfile from "../../store/UseProfile";
+import router from 'next/router';
+import {IconChevronDown} from "@tabler/icons";
 
 const useStyles = createStyles((theme) => ({
     container: {
         flexDirection: 'row',
-        flex:"1 1000",
+        flex: "1 1000",
         gap: theme.spacing.xs,
 
         [theme.fn.smallerThan('md')]: {
@@ -36,30 +39,48 @@ export default function ProjectSearchList() {
         }
     };
 
+    const profile = useProfile(state => state.profiles);
+
     return (
         <div>
             <Flex className={classes.container}>
                 <Autocomplete
-                    styles={{input: {minWidth: 250}}}
+                    styles={{input: {minWidth: 230}}}
                     value={value}
                     data={data}
                     onChange={handleChange}
                     rightSection={loading ? <Loader size={16}/> : null}
-                    label="Your Projects"
-                    placeholder="find a project"
+                    label="Projects"
+                    placeholder="Find a project"
                     style={{flexGrow: 1}}
                 />
                 <Flex gap={"xs"}>
-                    <Select data={["Recent", "Popularity"]} label="Sort" placeholder={"recent"}/>
-                    <Select data={["All", "Self"]} label="Organization" placeholder={"All"}/>
-                    <Select data={["All", "Public", "Unlisted"]} label="Type" placeholder={"All"}/>
-                    <Button mb={1} mt={"xl"} variant={"gradient"}> New</Button>
+                    <Input.Wrapper label="Sort">
+                        <Input component="select" rightSection={<IconChevronDown size={14} stroke={1.5}/>}>
+                            <option value="Recent">Recent</option>
+                            <option value="Popularity">Popularity</option>
+                        </Input>
+                    </Input.Wrapper>
+                    <Input.Wrapper label="Organization">
+                        <Input component="select" rightSection={<IconChevronDown size={14} stroke={1.5}/>}>
+                            <option value="All">All</option>
+                            <option value={`${profile?.username}`}>{profile?.username}</option>
+                        </Input>
+                    </Input.Wrapper>
+                    <Input.Wrapper label="Type">
+                        <Input component="select" rightSection={<IconChevronDown size={14} stroke={1.5}/>}>
+                            <option value="All">All</option>
+                            <option value="Public">Public</option>
+                            <option value="Unlisted">Unlisted</option>
+                        </Input>
+                    </Input.Wrapper>
+                    <Button mb={1} mt={"xl"} variant={"gradient"} onClick={() => {
+                        router.push(profile?.username + "/new");
+                    }}> New</Button>
                 </Flex>
             </Flex>
             <Divider my={"sm"}/>
             <Flex direction={"column"}>
-                <p>dsad</p>
-                <p>dsad</p>
             </Flex>
         </div>
     );

@@ -4,7 +4,8 @@ import {Database} from '../../utils/database.types'
 import {useRouter} from 'next/router';
 import SetUserName from "../../components/Profile/SetUserName";
 import Profile from "../../components/Profile/Profile";
-import useLoginState from "../../store/UseLoginState";
+import useProfile from "../../store/UseProfile";
+import {Box, Overlay} from "@mantine/core";
 
 type Profiles = Database['public']['Tables']['profiles']['Row']
 
@@ -12,8 +13,8 @@ export default function Account() {
     const supabase = useSupabaseClient<Database>()
     const session = useSession()
     const user = useUser()
-    const SetProfile=useLoginState(state=>state.SetProfiles);
-    const profile=useLoginState(state=>state.profiles);
+    const SetProfile = useProfile(state => state.SetProfiles);
+    const profile = useProfile(state => state.profiles);
     const router = useRouter();
     const lock = useRef(true);
 
@@ -34,8 +35,11 @@ export default function Account() {
 
     return (
         <>
-            {!lock && session && profile?.username==null && <SetUserName profile={profile as Profiles}/>}
-            <Profile profile={profile as Profiles}/>
+            {lock && session && profile?.username == null && <SetUserName profile={profile as Profiles}/>}
+            <Box sx={{ height: "70vh", position: 'relative'}} mt={10} p={10}>
+                {profile?.username == null && <Overlay opacity={0.6} color="#000" zIndex={5}/>}
+                <Profile profile={profile as Profiles}/>
+            </Box>
         </>
     )
 }

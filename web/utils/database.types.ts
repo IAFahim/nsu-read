@@ -36,9 +36,6 @@ export interface Database {
                     avatar_url?: string | null
                     website?: string | null
                 }
-                fetch: (id: string) => Promise<Database['public']['Tables']['profiles']['Row'] | null>
-                update:(row: Database['public']['Tables']['profiles']['Update']) => void
-                insert:(row: Database['public']['Tables']['profiles']['Insert']) => void
             }
             organizations: {
                 Row: {
@@ -68,6 +65,14 @@ export interface Database {
                     bio?: string | null
                     location?: string | null
                     website?: string | null
+                }
+            }
+            project: {
+                Row: {
+                    name: string
+                    type: string
+                    description: string | null
+                    users: string[] | null
                 }
             }
         }

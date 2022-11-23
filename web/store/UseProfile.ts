@@ -5,7 +5,7 @@ import {Database} from "../utils/database.types";
 type Profiles = Database['public']['Tables']['profiles']['Row']
 
 
-let useLoginState = create(persist((set: any) => ({
+let useProfile = create(persist((set: any) => ({
     isLoggedIn: false,
     profiles: null as Profiles | null,
     SetProfiles: (profiles: Profiles) => set({profiles}),
@@ -17,5 +17,5 @@ let useLoginState = create(persist((set: any) => ({
     getStorage: () => localStorage,
 }));
 
-export default useLoginState
+export default useProfile
 

@@ -25,7 +25,7 @@ import Image from "next/image";
 import {useSession, useSupabaseClient} from '@supabase/auth-helpers-react'
 import {Database} from "../../utils/database.types";
 import {useEffect, useState} from "react";
-import useLoginState from "../../store/UseLoginState";
+import useProfile from "../../store/UseProfile";
 
 type Profiles = Database['public']['Tables']['profiles']['Row']
 
@@ -140,8 +140,8 @@ export function HeaderMantine() {
         </UnstyledButton>
     ));
 
-    const isLoggedIn = useLoginState(state => state.isLoggedIn);
-    const SetLoggedIn = useLoginState(state => state.SetLoggedIn);
+    const isLoggedIn = useProfile(state => state.isLoggedIn);
+    const SetLoggedIn = useProfile(state => state.SetLoggedIn);
 
     useEffect(() => {
         SetLoggedIn(session != null);

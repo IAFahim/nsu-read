@@ -1,4 +1,4 @@
-import {Avatar, Flex, Title, Text, Grid, Container, Image, createStyles, Divider} from "@mantine/core";
+import {Avatar,Overlay, Flex, Title, Text, Grid, Container, Image, createStyles, Divider} from "@mantine/core";
 import {Database} from "../../utils/database.types";
 import {IconCone, IconUser} from "@tabler/icons";
 import ProjectSearchList from "./ProjectSearchList";
@@ -20,7 +20,8 @@ const useStyles = createStyles((theme) => ({
     },
     ProfileContainer: {
         flexDirection: "row",
-        justifyContent: "space-evenly",
+        flex: "auto",
+        justifyContent: "center",
         [theme.fn.smallerThan("md")]: {
             flexDirection: "column",
         }
@@ -46,7 +47,6 @@ export default function Profile({profile}: { profile: Profiles }) {
                         <Title>{profile?.username}</Title>
                         <Text size={"sm"} color={"dimmed"}>{profile?.full_name}</Text>
                     </Flex>
-
                 </Flex>
                 <ProjectSearchList/>
 
