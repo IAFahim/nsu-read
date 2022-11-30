@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {useSession, useSupabaseClient, useUser} from '@supabase/auth-helpers-react'
 import {Database} from '../../utils/database.types'
 import {useRouter} from 'next/router';
@@ -9,6 +9,7 @@ import {Box, Overlay} from "@mantine/core";
 
 type Profiles = Database['public']['Tables']['profiles']['Row']
 
+
 export default function Account() {
     const supabase = useSupabaseClient<Database>()
     const session = useSession()
@@ -17,6 +18,7 @@ export default function Account() {
     const profile = useProfile(state => state.profiles);
     const router = useRouter();
     const lock = useRef(true);
+
 
     useEffect(() => {
         async function fetchProfile() {
@@ -36,7 +38,7 @@ export default function Account() {
     return (
         <>
             {lock && session && profile?.username == null && <SetUserName profile={profile as Profiles}/>}
-            <Box sx={{ height: "70vh", position: 'relative'}} mt={10} p={10}>
+            <Box sx={{height: "70vh", position: 'relative'}} mt={10} p={10}>
                 {profile?.username == null && <Overlay opacity={0.6} color="#000" zIndex={5}/>}
                 <Profile profile={profile as Profiles}/>
             </Box>

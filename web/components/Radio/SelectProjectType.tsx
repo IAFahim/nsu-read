@@ -11,7 +11,9 @@ export default function SelectProjectType() {
         <Radio.Group
             name="favoriteFramework"
             value={type}
-            onChange={(event) => SetType(event)}
+            onChange={(event) => {
+                SetType(event)
+            }}
             orientation="vertical"
             label="Make the Project"
             description="You can change it at any time"

@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import {forwardRef, useEffect} from 'react';
 import { MultiSelect, Avatar, Group, Text } from '@mantine/core';
 
 const data = [
@@ -53,6 +53,13 @@ const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
 );
 
 export default function FindPeople() {
+
+    useEffect(() => {
+        async function fetchUsers() {
+
+        }
+    },[])
+
     return (
         <MultiSelect
             label="Add people by Username, Email, Group Name"

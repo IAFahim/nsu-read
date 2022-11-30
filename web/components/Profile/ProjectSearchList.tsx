@@ -1,9 +1,26 @@
-import {useState, useRef} from 'react';
-import {Autocomplete, Button, createStyles, Divider, Flex, Grid, Input, Loader, Select} from '@mantine/core';
+import {useState, useRef, useEffect, forwardRef} from 'react';
+import {
+    Autocomplete,
+    Avatar,
+    Button,
+    createStyles,
+    Divider,
+    Flex,
+    Grid,
+    Group,
+    Input,
+    Loader,
+    Select, Text
+} from '@mantine/core';
 import useProfile from "../../store/UseProfile";
 import router from 'next/router';
 import {IconChevronDown} from "@tabler/icons";
 import CreateNew from "../Button/CreateNew";
+import {Database} from "../../utils/database.types";
+import {useSupabaseClient} from "@supabase/auth-helpers-react";
+import {placeholder, PLACEHOLDERS_ALIAS} from "@babel/types";
+import {jsx} from "@emotion/react";
+import IntrinsicAttributes = jsx.JSX.IntrinsicAttributes;
 
 const useStyles = createStyles((theme) => ({
     container: {
@@ -16,8 +33,43 @@ const useStyles = createStyles((theme) => ({
         }
     }
 }));
+type Project = Database['public']['Tables']['projects']['Row'];
+
+function ProjectLists(props: { projects: Project[] }) {
+    const list = props.projects.map(p => {
+        return (
+            <ProjectList
+                key={p.name}
+                // @ts-ignore
+                project={p}/>
+        )
+    })
+    return (
+        <div>
+            {list}
+        </div>
+    )
+}
+
+
+function ProjectList({name, type, description}: Project) {
+    return (
+        <div>
+            <Group noWrap>
+                <Text>{name}</Text>
+                <div>
+                    <Text>{type}</Text>
+                    <Text size="xs" color="dimmed">
+                        {description}
+                    </Text>
+                </div>
+            </Group>
+        </div>
+    )
+}
 
 export default function ProjectSearchList() {
+    const projectReq = useSupabaseClient<Database>()
     const {classes, theme} = useStyles();
     const timeoutRef = useRef<number>(-1);
     const [value, setValue] = useState('');
@@ -41,6 +93,23 @@ export default function ProjectSearchList() {
     };
 
     const profile = useProfile(state => state.profiles);
+    const lock = useRef(true);
+    const [projectList, setProjectList] = useState([] as Project[]);
+
+    useEffect(() => {
+        async function fetchProfile() {
+            if (lock.current) {
+                const project = await projectReq.from("projects").select("*").eq("id", profile?.id);
+                if (project.data) {
+                    setProjectList(project.data);
+                }
+                console.log(project.data);
+            }
+        }
+
+        fetchProfile();
+    }, [])
+
 
     return (
         <div>
@@ -80,6 +149,7 @@ export default function ProjectSearchList() {
             </Flex>
             <Divider my={"sm"}/>
             <Flex direction={"column"}>
+                {/*<ProjectLists projects={projectList}/>*/}
             </Flex>
         </div>
     );

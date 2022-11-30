@@ -2,9 +2,10 @@ import create from "zustand"
 import {persist} from "zustand/middleware";
 import {Database} from "../utils/database.types";
 
-type Project = Database['public']['Tables']['project']['Row']
+type Project = Database['public']['Tables']['projects']['Row']
 
 let UseProject = create(persist((set: any) => ({
+    id: "" as string,
     name: null as string | null,
     type: "Public" as string,
     description: null as string | null,

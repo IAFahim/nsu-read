@@ -67,8 +67,9 @@ export interface Database {
                     website?: string | null
                 }
             }
-            project: {
+            projects: {
                 Row: {
+                    id: string
                     name: string
                     type: string
                     description: string | null
