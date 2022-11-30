@@ -52,15 +52,16 @@ function ProjectLists(props: { projects: Project[] }) {
 }
 
 
-function ProjectList({name, type, description}: Project) {
+function ProjectList(props: { project: Project }) {
+    console.log(props.project)
     return (
         <div>
             <Group noWrap>
-                <Text>{name}</Text>
+                <Text>{props.project.name}</Text>
                 <div>
-                    <Text>{type}</Text>
+                    <Text>{props.project.type}</Text>
                     <Text size="xs" color="dimmed">
-                        {description}
+                        {props.project.description}
                     </Text>
                 </div>
             </Group>
@@ -99,11 +100,12 @@ export default function ProjectSearchList() {
     useEffect(() => {
         async function fetchProfile() {
             if (lock.current) {
+                lock.current = false;
                 const project = await projectReq.from("projects").select("*").eq("id", profile?.id);
                 if (project.data) {
                     setProjectList(project.data);
                 }
-                console.log(project.data);
+                // console.log(project.data);
             }
         }
 
@@ -149,7 +151,7 @@ export default function ProjectSearchList() {
             </Flex>
             <Divider my={"sm"}/>
             <Flex direction={"column"}>
-                {/*<ProjectLists projects={projectList}/>*/}
+                <ProjectLists projects={projectList}/>
             </Flex>
         </div>
     );
