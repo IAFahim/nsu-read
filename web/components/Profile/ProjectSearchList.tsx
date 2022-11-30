@@ -3,6 +3,7 @@ import {Autocomplete, Button, createStyles, Divider, Flex, Grid, Input, Loader, 
 import useProfile from "../../store/UseProfile";
 import router from 'next/router';
 import {IconChevronDown} from "@tabler/icons";
+import CreateNew from "../Button/CreateNew";
 
 const useStyles = createStyles((theme) => ({
     container: {
@@ -74,9 +75,7 @@ export default function ProjectSearchList() {
                             <option value="Unlisted">Unlisted</option>
                         </Input>
                     </Input.Wrapper>
-                    <Button mb={1} mt={"xl"} variant={"gradient"} onClick={() => {
-                        router.push(profile?.username + "/new");
-                    }}> New</Button>
+                    <CreateNew/>
                 </Flex>
             </Flex>
             <Divider my={"sm"}/>
