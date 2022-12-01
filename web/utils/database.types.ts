@@ -76,6 +76,13 @@ export interface Database {
                     users: string[] | null
                 }
             }
+            groups: {
+                Row: {
+                    id: string
+                    name: string
+                    description: string | null
+                }
+            }
         }
         Views: {
             [_ in never]: never

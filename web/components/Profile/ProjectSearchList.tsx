@@ -59,9 +59,9 @@ function ProjectList(props: { project: Project }) {
             <Group noWrap>
                 <Text>{props.project.name}</Text>
                 <div>
-                    <Text>{props.project.type}</Text>
+                    <Text>{props.project.description}</Text>
                     <Text size="xs" color="dimmed">
-                        {props.project.description}
+                        {props.project.type}
                     </Text>
                 </div>
             </Group>

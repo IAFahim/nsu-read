@@ -22,10 +22,6 @@ export default function CreateNewProjectPage() {
         console.log(name, description, type, users)
     };
 
-    useEffect(() => {
-
-    })
-
 
     const refName = useRef<HTMLInputElement>(null);
     const refDescription = useRef<HTMLTextAreaElement>(null);
