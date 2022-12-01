@@ -56,7 +56,10 @@ function ProjectList(props: { project: Project }) {
     console.log(props.project)
     return (
         <div>
-            <Group noWrap>
+            <Group noWrap onClick={()=>{
+                router.push(`${props.project.id}/${props.project.name}`)
+            }
+            }>
                 <Text>{props.project.name}</Text>
                 <div>
                     <Text>{props.project.description}</Text>
