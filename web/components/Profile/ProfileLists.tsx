@@ -1,4 +1,4 @@
-import {useState, useRef, useEffect, forwardRef} from 'react';
+import React, {useState, useRef, useEffect, forwardRef} from 'react';
 import {
     Autocomplete,
     Avatar,
@@ -10,7 +10,7 @@ import {
     Group,
     Input,
     Loader,
-    Select, Text
+    Select, Text, Tabs, Container
 } from '@mantine/core';
 import useProfile from "../../store/UseProfile";
 import router from 'next/router';
@@ -21,6 +21,8 @@ import {useSupabaseClient} from "@supabase/auth-helpers-react";
 import {placeholder, PLACEHOLDERS_ALIAS} from "@babel/types";
 import {jsx} from "@emotion/react";
 import IntrinsicAttributes = jsx.JSX.IntrinsicAttributes;
+import ProjectLists from "../Projects/ProjectLists";
+import GroupList from "../Groups/GroupList";
 
 const useStyles = createStyles((theme) => ({
     container: {
@@ -33,47 +35,10 @@ const useStyles = createStyles((theme) => ({
         }
     }
 }));
-type Project = Database['public']['Tables']['projects']['Row'];
-
-function ProjectLists(props: { projects: Project[] }) {
-    const list = props.projects.map(p => {
-        return (
-            <ProjectList
-                key={p.name}
-                // @ts-ignore
-                project={p}/>
-        )
-    })
-    return (
-        <div>
-            {list}
-        </div>
-    )
-}
 
 
-function ProjectList(props: { project: Project }) {
-    console.log(props.project)
-    return (
-        <div>
-            <Group noWrap onClick={()=>{
-                router.push(`${props.project.created_by}/${props.project.name}`)
-            }
-            }>
-                <Text>{props.project.name}</Text>
-                <div>
-                    <Text>{props.project.description}</Text>
-                    <Text size="xs" color="dimmed">
-                        {props.project.type}
-                    </Text>
-                </div>
-            </Group>
-        </div>
-    )
-}
+export default function ProfileLists() {
 
-export default function ProjectSearchList() {
-    const supabase = useSupabaseClient<Database>()
     const {classes, theme} = useStyles();
     const timeoutRef = useRef<number>(-1);
     const [value, setValue] = useState('');
@@ -95,27 +60,7 @@ export default function ProjectSearchList() {
             }, 1000);
         }
     };
-
     const profile = useProfile(state => state.profiles);
-    const lock = useRef(true);
-    const [projectList, setProjectList] = useState([] as Project[]);
-
-    useEffect(() => {
-        async function fetchProfile() {
-            if (lock.current) {
-                lock.current = false;
-                const project = await supabase.from("projects").select("*").eq("created_by", profile?.username);
-                if (project.data) {
-                    setProjectList(project.data);
-                }
-                // console.log(project.data);
-            }
-        }
-
-        fetchProfile();
-    }, [])
-
-
     return (
         <div>
             <Flex className={classes.container}>
@@ -146,15 +91,37 @@ export default function ProjectSearchList() {
                         <Input component="select" rightSection={<IconChevronDown size={14} stroke={1.5}/>}>
                             <option value="All">All</option>
                             <option value="Public">Public</option>
+                            <option value="Private">Private</option>
                             <option value="Unlisted">Unlisted</option>
                         </Input>
                     </Input.Wrapper>
                     <CreateNew/>
                 </Flex>
             </Flex>
-            <Divider my={"sm"}/>
             <Flex direction={"column"}>
-                <ProjectLists projects={projectList}/>
+                <Tabs defaultValue="projects">
+                    <Tabs.List>
+                        <Tabs.Tab value="projects">Projects</Tabs.Tab>
+                        <Tabs.Tab value="groups">Groups</Tabs.Tab>
+                        <Tabs.Tab value="Reading Materials" ml="auto">
+                            Reading Materials
+                        </Tabs.Tab>
+                    </Tabs.List>
+                    <Tabs.Panel value={"projects"}>
+                        <ProjectLists/>
+                    </Tabs.Panel>
+
+                    <Tabs.Panel value={"groups"}>
+                        <Group>
+                            <GroupList/>
+                        </Group>
+                    </Tabs.Panel>
+                    <Tabs.Panel value={"Reading Materials"}>
+                        <Group>
+                            <Text>Reading Materials</Text>
+                        </Group>
+                    </Tabs.Panel>
+                </Tabs>
             </Flex>
         </div>
     );

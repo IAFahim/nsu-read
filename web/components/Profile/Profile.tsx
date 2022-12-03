@@ -1,7 +1,7 @@
 import {Avatar,Overlay, Flex, Title, Text, Grid, Container, Image, createStyles, Divider} from "@mantine/core";
 import {Database} from "../../utils/database.types";
 import {IconCone, IconUser} from "@tabler/icons";
-import ProjectSearchList from "./ProjectSearchList";
+import ProfileLists from "./ProfileLists";
 import {useTheme} from "@emotion/react";
 
 type Profiles = Database['public']['Tables']['users']['Row']
@@ -39,7 +39,7 @@ export default function Profile({profile}: { profile: Profiles }) {
     const {classes, theme} = useStyles();
     return (
         <>
-            <Flex pt={"sm"} className={classes.ProfileContainer}>
+            <Flex pt={"sm"} className={classes.ProfileContainer} gap={"xl"}>
                 <Flex className={classes.ProfilePicText}>
                     <Image placeholder={<IconUser/>} className={classes.ProfilePicture} src={profile?.avatar_url}
                            alt="profile logo"/>
@@ -48,7 +48,7 @@ export default function Profile({profile}: { profile: Profiles }) {
                         <Text size={"sm"} color={"dimmed"}>{profile?.full_name}</Text>
                     </Flex>
                 </Flex>
-                <ProjectSearchList/>
+                <ProfileLists/>
 
             </Flex>
         </>
