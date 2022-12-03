@@ -7,7 +7,7 @@ import Profile from "../../components/Profile/Profile";
 import useProfile from "../../store/UseProfile";
 import {Box, Overlay} from "@mantine/core";
 
-type Profiles = Database['public']['Tables']['profiles']['Row']
+type Profiles = Database['public']['Tables']['users']['Row']
 
 
 export default function Account() {
@@ -24,7 +24,7 @@ export default function Account() {
         async function fetchProfile() {
             if (lock.current) {
                 lock.current = false;
-                const data = await supabase.from("profiles").select("*").eq("id", session?.user?.id).single()
+                const data = await supabase.from("users").select("*").eq("id", session?.user?.id).single()
                 if (data.data) {
                     SetProfile(data.data)
                 }

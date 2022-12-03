@@ -57,7 +57,7 @@ function ProjectList(props: { project: Project }) {
     return (
         <div>
             <Group noWrap onClick={()=>{
-                router.push(`${props.project.id}/${props.project.name}`)
+                router.push(`${props.project.created_by}/${props.project.name}`)
             }
             }>
                 <Text>{props.project.name}</Text>
@@ -73,7 +73,7 @@ function ProjectList(props: { project: Project }) {
 }
 
 export default function ProjectSearchList() {
-    const projectReq = useSupabaseClient<Database>()
+    const supabase = useSupabaseClient<Database>()
     const {classes, theme} = useStyles();
     const timeoutRef = useRef<number>(-1);
     const [value, setValue] = useState('');
@@ -104,7 +104,7 @@ export default function ProjectSearchList() {
         async function fetchProfile() {
             if (lock.current) {
                 lock.current = false;
-                const project = await projectReq.from("projects").select("*").eq("id", profile?.id);
+                const project = await supabase.from("projects").select("*").eq("created_by", profile?.username);
                 if (project.data) {
                     setProjectList(project.data);
                 }

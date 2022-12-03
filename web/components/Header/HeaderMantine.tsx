@@ -27,7 +27,7 @@ import {Database} from "../../utils/database.types";
 import {useEffect, useState} from "react";
 import useProfile from "../../store/UseProfile";
 
-type Profiles = Database['public']['Tables']['profiles']['Row']
+type Profiles = Database['public']['Tables']['users']['Row']
 
 
 const useStyles = createStyles((theme) => ({
@@ -147,10 +147,12 @@ export function HeaderMantine() {
         SetLoggedIn(session != null);
     }, [session]);
 
+    const SetProfiles= useProfile(state => state.SetProfiles);
     const toggleLogin = () => {
         if (session) {
             router.push("/").then(() => {
                 supabase.auth.signOut().then(() => {
+                    SetProfiles(null);
                     SetLoggedIn(false);
                 });
             })
@@ -164,7 +166,7 @@ export function HeaderMantine() {
             <Header height={60} px="md">
                 <Group position="apart" sx={{height: '100%'}}>
                     <Center inline style={{userSelect: "none"}}>
-                        <Image src={NSUReadLogo} height={30} width={30}/>
+                        <Image src={NSUReadLogo} height={30} width={30} alt={"profile_picture_of_someone_awesome"}/>
                         <Title>SU-Read</Title>
                     </Center>
                     <Group sx={{height: '100%'}} spacing={0} className={classes.hiddenMobile}>

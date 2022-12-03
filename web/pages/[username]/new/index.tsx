@@ -6,6 +6,7 @@ import {useEffect, useRef} from "react";
 import {useSupabaseClient} from "@supabase/auth-helpers-react";
 import {Database} from "../../../utils/database.types";
 import useProfile from "../../../store/UseProfile";
+import router from "next/router";
 
 type Project = Database['public']['Tables']['projects']['Row'];
 export default function CreateNewProjectPage() {
@@ -13,13 +14,18 @@ export default function CreateNewProjectPage() {
     const profile = useProfile(state => state.profiles);
     const supabase = useSupabaseClient<Database>()
     const createProject = async () => {
-        const data =await supabase.from("projects").insert({
-            id: profile?.id,
+        const data = await supabase.from("projects").insert({
+            created_by: profile?.username,
             name: name,
             description: description,
             type: type,
         });
-        console.log(name, description, type, users)
+        if (data.error) {
+            console.log(data.error)
+        } else {
+            router.push(`/${profile?.username}/${name}`)
+        }
+
     };
 
 
@@ -29,7 +35,6 @@ export default function CreateNewProjectPage() {
     const SetName = useProjects(state => state.SetName);
     const SetType = useProjects(state => state.SetType);
     const SetDescription = useProjects(state => state.SetDescription);
-
 
 
     return (

@@ -5,7 +5,7 @@ import {JSXElementConstructor, ReactElement, ReactFragment, ReactNode, ReactPort
 import {useSession, useSupabaseClient} from "@supabase/auth-helpers-react";
 import {useRouter} from "next/router";
 
-type Profiles = Database['public']['Tables']['profiles']['Row']
+type Profiles = Database['public']['Tables']['users']['Row']
 
 function ActionIcon(props: { size: number, variant: string, radius: string, children: ReactNode }) {
     return null;
@@ -21,7 +21,7 @@ export default function SetUserName({profile}: { profile: Profiles }) {
         const {
             data,
             error
-        } = await supabase.from("profiles").update({username: ref.current?.value}).eq("id", session?.user?.id)
+        } = await supabase.from("users").update({username: ref.current?.value}).eq("id", session?.user?.id)
         if (error) {
             console.log('error', error)
         }else{

@@ -4,7 +4,7 @@ import {IconCone, IconUser} from "@tabler/icons";
 import ProjectSearchList from "./ProjectSearchList";
 import {useTheme} from "@emotion/react";
 
-type Profiles = Database['public']['Tables']['profiles']['Row']
+type Profiles = Database['public']['Tables']['users']['Row']
 const useStyles = createStyles((theme) => ({
     ProfilePicture: {
         width: 256,
