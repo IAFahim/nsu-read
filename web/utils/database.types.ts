@@ -82,6 +82,7 @@ export interface Database {
                 }
             }
         }
+        storage:{}
         Views: {
             [_ in never]: never
         }

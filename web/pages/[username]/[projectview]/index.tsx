@@ -12,7 +12,7 @@ function TopTab() {
                 <Tabs.Tab icon={<IconGraph size={14}/>} value="Statistic">Statistic</Tabs.Tab>
             </Tabs.List>
             <Tabs.Panel value={"Read"}>
-                <Read></Read>
+                <Read/>
             </Tabs.Panel>
         </Tabs>
     );

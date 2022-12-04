@@ -1,91 +1,106 @@
-import {useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 
 // Import Worker
-import { Worker } from '@react-pdf-viewer/core';
-// Import the main Viewer component
-import { Viewer } from '@react-pdf-viewer/core';
-// Import the styles
+import {Worker} from '@react-pdf-viewer/core';
+import {Viewer} from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
-// default layout plugin
-import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
-// Import styles of default layout plugin
+import {defaultLayoutPlugin} from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import {Button, Container, Group} from "@mantine/core";
+import {IconEdit} from "@tabler/icons";
+import {Database} from "../../utils/database.types";
+import {useSupabaseClient} from "@supabase/auth-helpers-react";
+import useProfile from "../../store/UseProfile";
+import router, {useRouter} from "next/router";
+import useURL from "../../store/UseURL";
 
 function Read() {
-
-    // creating new plugin instance
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
-
-    // pdf file onChange state
-    const [pdfFile, setPdfFile]=useState(null);
-
-    // pdf file error state
-    const [pdfError, setPdfError]=useState('');
-
-
-    // handle file onChange event
     const allowedFiles = ['application/pdf'];
-    const handleFile = (e: { target: { files: any[]; }; }) =>{
+    const supabase = useSupabaseClient<Database>();
+    const router = useRouter();
+
+    const handleFile = async (e: { target: { files: any[]; }; }) => {
         let selectedFile = e.target.files[0];
-        // console.log(selectedFile.type);
-        if(selectedFile){
-            if(selectedFile&&allowedFiles.includes(selectedFile.type)){
-                let reader = new FileReader();
-                reader.readAsDataURL(selectedFile);
-                reader.onloadend=(e)=>{
-                    setPdfError('');
-                    // @ts-ignore
-                    setPdfFile(e.target.result);
-                }
+        if (selectedFile && allowedFiles.includes(selectedFile.type)) {
+            console.log(router.query.username + "/" + router.query.projectview + "/");
+
+            const data = await supabase.storage.from('pdf')
+                .upload(`${router.query.username}/${router.query.projectview}/${selectedFile.name}`, selectedFile,
+                    {
+                        cacheControl: '3600',
+                        upsert: true,
+                    });
+
+            if (data.error) {
+                console.log(data.error);
             }
-            else{
-                setPdfError('Not a valid pdf: Please select only PDF');
+
+            let reader = new FileReader();
+            reader.readAsDataURL(selectedFile);
+
+            reader.onloadend = (e) => {
                 // @ts-ignore
-                setPdfFile('');
+                setPdfFile(e.target.result);
             }
-        }
-        else{
-            console.log('please select a PDF');
+        } else {
+            // @ts-ignore
+            setPdfFile('');
         }
     }
 
+
+    const url = useURL((state) => state.url);
+    const setURL = useURL((state) => state.setURL);
+
+    useEffect(() => {
+        if(!router.isReady)return;
+        async function get() {
+            const {
+                data,
+                error
+            } = await supabase.storage.from('pdf').list(`${router.query.username}/${router.query.projectview}`);
+            if (data && data.length > 0) {
+                console.log(data[0]);
+            }
+
+            if (data && data.length > 0) {
+                const fileLink = supabase.storage.from('pdf').getPublicUrl(`${router.query.username}/${router.query.projectview}/${data[0].name}`);
+                if (fileLink) {
+                    setURL(fileLink.data.publicUrl);
+                    console.log(fileLink.data.publicUrl);
+                }
+            }
+        }
+        if(router.query.username && router.query.projectview){
+            get();
+        }
+
+    }, [router.isReady])
+
+
     return (
-        <div className="container">
+        <>
+            <Button mt={2} style={{position: "absolute", right: 10}} variant="default"
+                    rightIcon={<IconEdit size={14}/>}>Edit</Button>
 
-            {/* Upload PDF */}
-            <form>
 
-                <label><h5>Upload PDF</h5></label>
-                <br></br>
-
-                <input type='file' className="form-control"
-                    // @ts-ignore
-                       onChange={handleFile}></input>
-
-                {/* we will display error message in case user select some file
-        other than pdf */}
-                {pdfError&&<span className='text-danger'>{pdfError}</span>}
-
-            </form>
-
-            {/* View PDF */}
-            <h5>View PDF</h5>
-            <div className="viewer">
-
-                {/* render this if we have a pdf file */}
-                {pdfFile&&(
+            <Group position="center" grow pt={40}>
+                {url!=='' && (
                     <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js">
-                        <Viewer fileUrl={pdfFile}
+                        <Viewer fileUrl={url}
                                 plugins={[defaultLayoutPluginInstance]}></Viewer>
                     </Worker>
                 )}
+            </Group>
+            <form>
+                <input type='file'
+                    // @ts-ignore
+                       onChange={handleFile}></input>
 
-                {/* render this if we have pdfFile state null   */}
-                {!pdfFile&&<>No file is selected yet</>}
-
-            </div>
-
-        </div>
+            </form>
+            {url!=='' && <>No file is selected yet</>}
+        </>
     );
 }
 
