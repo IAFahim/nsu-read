@@ -22,7 +22,6 @@ import {placeholder, PLACEHOLDERS_ALIAS} from "@babel/types";
 import {jsx} from "@emotion/react";
 import IntrinsicAttributes = jsx.JSX.IntrinsicAttributes;
 import ProjectLists from "../Projects/ProjectLists";
-import GroupList from "../Groups/GroupList";
 
 const useStyles = createStyles((theme) => ({
     container: {
@@ -99,29 +98,7 @@ export default function ProfileLists() {
                 </Flex>
             </Flex>
             <Flex direction={"column"}>
-                <Tabs defaultValue="projects">
-                    <Tabs.List>
-                        <Tabs.Tab value="projects">Projects</Tabs.Tab>
-                        <Tabs.Tab value="groups">Groups</Tabs.Tab>
-                        <Tabs.Tab value="Reading Materials" ml="auto">
-                            Reading Materials
-                        </Tabs.Tab>
-                    </Tabs.List>
-                    <Tabs.Panel value={"projects"}>
-                        <ProjectLists/>
-                    </Tabs.Panel>
-
-                    <Tabs.Panel value={"groups"}>
-                        <Group>
-                            <GroupList/>
-                        </Group>
-                    </Tabs.Panel>
-                    <Tabs.Panel value={"Reading Materials"}>
-                        <Group>
-                            <Text>Reading Materials</Text>
-                        </Group>
-                    </Tabs.Panel>
-                </Tabs>
+                <ProjectLists/>
             </Flex>
         </div>
     );
