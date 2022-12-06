@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@emotion/react": "11.10.5",
-    "@mantine/core": "5.8.4",
+    "@mantine/core": "5.9.2",
     "@mantine/form": "^5.8.4",
-    "@mantine/hooks": "5.8.4",
+    "@mantine/hooks": "5.9.2",
     "@react-pdf-viewer/core": "^3.9.0",
     "@react-pdf-viewer/default-layout": "^3.9.0",
     "@react-pdf-viewer/open": "^3.9.0",
