@@ -62,7 +62,7 @@ export default function FindPeople() {
 
     return (
         <MultiSelect
-            label="Add people by Username, Email, Group Name"
+            label="Add people by Username, Email, GroupShowAll Name"
             placeholder="Pick all you like"
             itemComponent={SelectItem}
             data={data}

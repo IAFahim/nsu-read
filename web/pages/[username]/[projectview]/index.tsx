@@ -1,6 +1,7 @@
-import {Menu, Tabs} from "@mantine/core";
+import {Group, Menu, Tabs} from "@mantine/core";
 import {IconEdit, IconEye, IconGraph, IconTestPipe, IconTextPlus, IconUser} from "@tabler/icons";
 import Read from "../../../components/Read/Read";
+import GroupShowAll from "../../../components/Group/GroupShowAll";
 
 function TopTab() {
     return (
@@ -13,6 +14,9 @@ function TopTab() {
             </Tabs.List>
             <Tabs.Panel value={"Read"}>
                 <Read/>
+            </Tabs.Panel>
+            <Tabs.Panel value={"Group"}>
+                <GroupShowAll/>
             </Tabs.Panel>
         </Tabs>
     );

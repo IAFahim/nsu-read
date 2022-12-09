@@ -49,7 +49,7 @@ const ItemComponent: TransferListItemComponent = ({
     </Group>
 );
 
-type Group = Database['public']['Tables']['groups']['Row'];
+type GroupShowAll = Database['public']['Tables']['groups']['Row'];
 export default function ManageGroup() {
     const [data, setData] = useState<TransferListData>([mockdata, []]);
     const supabase = useSupabaseClient<Database>();
@@ -87,10 +87,10 @@ export default function ManageGroup() {
     return (
         <Container>
             <Flex justify={"space-between"}>
-                <Input placeholder="Group Name" style={{flexGrow:1}} onChange={(e: { target: { value: SetStateAction<string>; }; }) => setGName(e.target.value)}/>
+                <Input placeholder="GroupShowAll Name" style={{flexGrow:1}} onChange={(e: { target: { value: SetStateAction<string>; }; }) => setGName(e.target.value)}/>
                 <Button mr={"xl"} onClick={createGroup}>Set</Button>
 
-                <Input placeholder="Group Name" style={{flexGrow:1}} onChange={(e: { target: { value: SetStateAction<string>; }; }) => setGName(e.target.value)}/>
+                <Input placeholder="GroupShowAll Name" style={{flexGrow:1}} onChange={(e: { target: { value: SetStateAction<string>; }; }) => setGName(e.target.value)}/>
                 <Button>Fetch</Button>
             </Flex>
             <TransferList
