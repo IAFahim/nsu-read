@@ -76,9 +76,18 @@ export interface Database {
             }
             groups: {
                 Row: {
-                    id: string
+                    created_by: string
                     name: string
+                    created_at: string
                     description: string | null
+                }
+            },
+            group_members: {
+                Row: {
+                    created_by: string
+                    group_name: string
+                    member_name: string
+                    role: string
                 }
             }
         }

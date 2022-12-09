@@ -1,4 +1,4 @@
-import {SetStateAction, useEffect, useRef, useState} from 'react';
+import {forwardRef, SetStateAction, useEffect, useRef, useState} from 'react';
 import {
     Checkbox,
     Group,
@@ -7,28 +7,12 @@ import {
     TransferList,
     TransferListData,
     TransferListItemComponent,
-    TransferListItemComponentProps, Container, Input, Flex, Button,
+    TransferListItemComponentProps, Container, Input, Flex, Button, TransferListItem, Select,
 } from '@mantine/core';
 import {Database} from "../../../utils/database.types";
 import {useSupabaseClient} from "@supabase/auth-helpers-react";
 import useProfile from "../../../store/UseProfile";
 import {useRouter} from "next/router";
-
-let mockdata = [
-    {
-        value: 'bender',
-        image: 'https://img.icons8.com/clouds/256/000000/futurama-bender.png',
-        label: 'Student',
-        description: 'Fascinated with cooking, though has no sense of taste',
-    },
-
-    {
-        value: 'carol',
-        image: 'https://img.icons8.com/clouds/256/000000/futurama-mom.png',
-        label: 'Student',
-        description: 'One of the richest people on Earth',
-    },
-];
 
 const ItemComponent: TransferListItemComponent = ({
                                                       data,
@@ -49,9 +33,48 @@ const ItemComponent: TransferListItemComponent = ({
     </Group>
 );
 
+interface ItemProps extends React.ComponentPropsWithoutRef<'div'> {
+    label: string;
+    description: string;
+}
+
+const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
+    ({ label, description, ...others }: ItemProps, ref) => (
+        <div ref={ref} {...others}>
+            <Group noWrap>
+                <div>
+                    <Text size="sm">{label}</Text>
+                    <Text size="xs" opacity={0.65}>
+                        {description}
+                    </Text>
+                </div>
+            </Group>
+        </div>
+    )
+);
+
+
+
+
 type GroupShowAll = Database['public']['Tables']['groups']['Row'];
 export default function ManageGroup() {
-    const [data, setData] = useState<TransferListData>([mockdata, []]);
+    const [mainGroup, SetMainGroup] = useState([
+        {
+            label: 'Student',
+            value: 'bender',
+            image: 'https://img.icons8.com/clouds/256/000000/futurama-bender.png',
+            description: 'Fascinated with cooking, though has no sense of taste',
+        },
+
+        {
+            label: 'Student',
+            value: 'carol',
+            image: 'https://img.icons8.com/clouds/256/000000/futurama-mom.png',
+            description: 'One of the richest people on Earth',
+        }
+    ] as TransferListItem[]);
+    const [otherGroup, SetOtherGroup] = useState([] as TransferListItem[]);
+    const [data, setData] = useState<TransferListData>([mainGroup, otherGroup]);
     const supabase = useSupabaseClient<Database>();
     const profile = useProfile(state => state.profiles);
     const [g_name, setGName] = useState("");
@@ -62,37 +85,50 @@ export default function ManageGroup() {
 
         });
     };
+
+
     const getMembers = async () => {
         const data = await supabase.from("groups").select("*");
+
 
     };
     const lock = useRef(true);
     const router = useRouter();
+    useEffect(() => {
 
-    // useEffect(() => {
-    //     async function fetchProfile() {
-    //         if (lock.current) {
-    //             lock.current = false;
-    //             const data = await supabase.from("profiles").select("*").eq("id", session?.user?.id).single()
-    //             if (data.data) {
-    //                 SetProfile(data.data)
-    //             }
-    //             console.log('data', data.data)
-    //         }
-    //     }
-    //
-    //     fetchProfile();
-    // }, [session])
+    }, []);
 
     return (
         <Container>
-            <Flex justify={"space-between"}>
-                <Input placeholder="GroupShowAll Name" style={{flexGrow:1}} onChange={(e: { target: { value: SetStateAction<string>; }; }) => setGName(e.target.value)}/>
-                <Button mr={"xl"} onClick={createGroup}>Set</Button>
+            <Group mb={"xs"}>
+                <Input placeholder="Name" style={{flexGrow: 1}}
+                       onChange={(e: { target: { value: SetStateAction<string>; }; }) => setGName(e.target.value)}/>
+                <Button onClick={createGroup}>Publish</Button>
+            </Group>
 
-                <Input placeholder="GroupShowAll Name" style={{flexGrow:1}} onChange={(e: { target: { value: SetStateAction<string>; }; }) => setGName(e.target.value)}/>
+            <Flex justify={"space-between"}>
+                <Select
+                    placeholder="Pick one"
+                    itemComponent={SelectItem}
+                    data={mainGroup}
+                    searchable
+                    style={{flexGrow: 1}}
+                    maxDropdownHeight={400}
+                    nothingFound="Nobody here"
+                    filter={(value, item) =>
+                        // @ts-ignore
+                        item.label.toLowerCase().includes(value.toLowerCase().trim()) ||
+                        item.description.toLowerCase().includes(value.toLowerCase().trim())
+                    }
+                />
+                <Button ml={"xs"} mr={"xl"} onClick={createGroup}>Add</Button>
+
+                <Input pr={"xs"} placeholder="Group to be transferred" style={{flexGrow: 1}}
+                       onChange={(e: { target: { value: SetStateAction<string>; }; }) => setGName(e.target.value)}/>
                 <Button>Fetch</Button>
             </Flex>
+
+
             <TransferList
                 value={data}
                 onChange={setData}

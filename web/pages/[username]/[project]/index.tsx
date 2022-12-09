@@ -2,6 +2,7 @@ import {Group, Menu, Tabs} from "@mantine/core";
 import {IconEdit, IconEye, IconGraph, IconTestPipe, IconTextPlus, IconUser} from "@tabler/icons";
 import Read from "../../../components/Read/Read";
 import GroupShowAll from "../../../components/Group/GroupShowAll";
+import Quiz from "../../../components/Quiz/Quiz";
 
 function TopTab() {
     return (
@@ -18,10 +19,14 @@ function TopTab() {
             <Tabs.Panel value={"Group"}>
                 <GroupShowAll/>
             </Tabs.Panel>
+
+            <Tabs.Panel value={"Quiz"}>
+                <Quiz/>
+            </Tabs.Panel>
         </Tabs>
     );
 }
 
-export default function ProjectView() {
+export default function Project() {
     return (<><TopTab/></>)
 }

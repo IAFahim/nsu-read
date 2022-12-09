@@ -1,23 +1,37 @@
-import {ActionIcon, Avatar, Collapse, Container, Group, Menu, ScrollArea, Table, Text} from "@mantine/core";
+import {
+    ActionIcon,
+    Avatar,
+    Button,
+    Collapse,
+    Container,
+    Flex,
+    Group,
+    Menu,
+    ScrollArea,
+    Table,
+    Text
+} from "@mantine/core";
 import {IconDots, IconMessages, IconNote, IconPencil, IconReportAnalytics, IconTrash} from "@tabler/icons";
 import React, {useState} from "react";
+import router, {useRouter} from "next/router";
 
 
-export default function CreateByGroupName() {
-
-    const [data, setData] = useState([{
-        "avatar": "https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
-        "email": "rob_wolf@gmail.com",
-        "job": "Engineer",
-        "name": "Robert Wolfkisser",
-        "rate": 22
-    },
+export default function CreateByGroupName({GroupData}: { GroupData: { name: string, created_at: string } }) {
+    let router=useRouter();
+    const [data, setData] = useState([
         {
             "avatar": "https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
             "email": "rob_wolf@gmail.com",
             "job": "Engineer",
             "name": "Robert Wolfkisser",
-            "rate": 22
+            rate: 22
+        },
+        {
+            "avatar": "https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
+            "email": "rob_wolf@gmail.com",
+            "job": "Engineer",
+            "name": "Robert Wolfkisser",
+            rate: 22
         }
     ] as { avatar: string; name: string; job: string; email: string; rate: number }[]);
 
@@ -75,15 +89,34 @@ export default function CreateByGroupName() {
     ));
 
     const [opened, setOpened] = useState(false);
+
     return (
-        <Collapse in={opened}>
-            <Container>
-                <ScrollArea>
-                    <Table sx={{minWidth: 800}} verticalSpacing="xs">
-                        <tbody>{rows}</tbody>
-                    </Table>
-                </ScrollArea>
-            </Container>
-        </Collapse>
+        <Container>
+            <Flex justify={"space-between"} pt={"xs"}>
+                <Group>
+                    <Text >{GroupData.name}</Text>
+                    <Text size={"sm"} color={"dimmed"}>{GroupData?.created_at.split("T")[0]}</Text>
+                </Group>
+                <Group pb={"xs"}>
+                    <Button variant={"outline"} style={{maxWidth: 100}} onClick={()=>{
+                        router.push(`/${router.query.username}/${router.query.project}/quiz/${GroupData.name}`)
+                    }
+                    }>Quiz</Button>
+                    <Button style={{maxWidth: 100}} onClick={() => {
+                        setOpened(!opened)
+                    }}>Show</Button>
+                </Group>
+
+            </Flex>
+            <Collapse in={opened}>
+                <Container>
+                    <ScrollArea>
+                        <Table sx={{minWidth: 800}} verticalSpacing="xs">
+                            <tbody>{rows}</tbody>
+                        </Table>
+                    </ScrollArea>
+                </Container>
+            </Collapse>
+        </Container>
     );
 }

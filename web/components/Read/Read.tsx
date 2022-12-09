@@ -23,7 +23,7 @@ function Read() {
     const handleFile = async (e: { target: { files: any[]; }; }) => {
         let selectedFile = e.target.files[0];
         if (selectedFile && allowedFiles.includes(selectedFile.type)) {
-            console.log(router.query.username + "/" + router.query.projectview + "/");
+            console.log(router.query.username + "/" + router.query.project + "/");
 
             const data = await supabase.storage.from('pdf')
                 .upload(`${router.query.username}/${router.query.projectview}/${selectedFile.name}`, selectedFile,
@@ -54,28 +54,27 @@ function Read() {
     const setURL = useURL((state) => state.setURL);
 
     useEffect(() => {
-        if(!router.isReady)return;
+        if (!router.isReady) return;
+
         async function get() {
             const {
                 data,
                 error
-            } = await supabase.storage.from('pdf').list(`${router.query.username}/${router.query.projectview}`);
+            } = await supabase.storage.from('pdf').list(`${router.query.username}/${router.query.project}`);
             if (data && data.length > 0) {
                 console.log(data[0]);
             }
 
             if (data && data.length > 0) {
-                const fileLink = supabase.storage.from('pdf').getPublicUrl(`${router.query.username}/${router.query.projectview}/${data[0].name}`);
+                const fileLink = supabase.storage.from('pdf').getPublicUrl(`${router.query.username}/${router.query.project}/${data[0].name}`);
                 if (fileLink) {
                     setURL(fileLink.data.publicUrl);
                     console.log(fileLink.data.publicUrl);
                 }
             }
         }
-        if(router.query.username && router.query.projectview){
-            get();
-        }
 
+        get();
     }, [router.isReady])
 
 
@@ -86,7 +85,7 @@ function Read() {
 
 
             <Group position="center" grow pt={40}>
-                {url!=='' && (
+                {url !== '' && (
                     <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js">
                         <Viewer fileUrl={url}
                                 plugins={[defaultLayoutPluginInstance]}></Viewer>
@@ -99,7 +98,7 @@ function Read() {
                        onChange={handleFile}></input>
 
             </form>
-            {url!=='' && <>No file is selected yet</>}
+            {url !== '' && <>No file is selected yet</>}
         </>
     );
 }

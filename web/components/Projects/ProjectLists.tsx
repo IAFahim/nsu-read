@@ -26,7 +26,9 @@ export default function ProjectLists() {
             }
         }
 
-        fetchProfile();
+
+            fetchProfile();
+
     }, [])
 
     const list = projectList.map(p => {
