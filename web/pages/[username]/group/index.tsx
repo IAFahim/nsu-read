@@ -90,10 +90,11 @@ type GroupShowAll = Database['public']['Tables']['groups']['Row'];
 export default function ManageGroup() {
     const [usersGroupList, SetUsersGroupList] = useState([] as TransferListItem[]);
     const [group_members, SetGroup_members] = useState([] as TransferListItem[]);
+    const supabase=useSupabaseClient<Database>();
+
     const [mainGroup, SetMainGroup] = useState([] as TransferListItem[]);
     const [otherGroup, SetOtherGroup] = useState([] as TransferListItem[]);
     const [data, setData] = useState<TransferListData>([mainGroup, otherGroup]);
-    const supabase = useSupabaseClient<Database>();
     const profile = useProfile(state => state.profiles);
 
     const newGroupName = useRef<HTMLInputElement>("" as unknown as HTMLInputElement);
@@ -104,7 +105,7 @@ export default function ManageGroup() {
     const lock = useRef(true);
     const router = useRouter();
     useEffect(() => {
-        async function fetchProfile() {
+        async function fetchGroups() {
             if (!router.isReady) return;
             if (lock.current) {
                 lock.current = false;
@@ -123,8 +124,25 @@ export default function ManageGroup() {
                 }
             }
         }
+        async function fetchUsers() {
+            const {data, error} = await supabase.from("users").select("*");
+            if (data) {
+                const users = data.map((user) => ({
+                    value: user.username,
+                    label: user.username,
+                    description: user.bio,
+                    image: user.avatar_url,
+                }));
+                SetGroup_members(users);
+                console.log("Users:",users)
+            }else {
+                console.log(error)
+            }
+        }
 
-        fetchProfile();
+        fetchGroups().then(_=>{
+            fetchUsers()
+        });
     }, [router.isReady]);
 
     const createGroup = async () => {
@@ -146,6 +164,8 @@ export default function ManageGroup() {
     }
 
     const [value, setValue] = useState<string | null>(null);
+    const ref = useRef<HTMLInputElement>(null);
+    const [selected, setSelected] = useState<string[]>([]);
 
     return (
         <Container>
@@ -164,7 +184,10 @@ export default function ManageGroup() {
                     itemComponent={SelectItem}
                     style={{flexGrow: 1}}
                     data={group_members}
+                    value={selected}
+                    onChange={setSelected}
                     searchable
+                    clearable
                     nothingFound="Nobody here"
                     maxDropdownHeight={400}
                     filter={(value, selected, item) =>
@@ -175,7 +198,7 @@ export default function ManageGroup() {
                 />
 
                 <Button mt={"xl"} onClick={() => {
-                    console.log(value)
+                    console.log(selected)
                 }}>Add</Button>
             </Group>
 
@@ -185,11 +208,11 @@ export default function ManageGroup() {
                 <Select
                     placeholder="Your Groups"
                     value={value}
-                    onChange={setValue}
                     itemComponent={SelectItem}
                     data={usersGroupList}
                     searchable
                     style={{flexGrow: 1}}
+
                     maxDropdownHeight={400}
                     nothingFound="Nobody here"
                     filter={(value, item) => {
@@ -197,7 +220,7 @@ export default function ManageGroup() {
                     }}
                 />
                 <Button ml={"xs"} mr={"xl"} onClick={() => {
-                    console.log(value)
+
                 }
                 }>Add</Button>
 

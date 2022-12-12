@@ -14,7 +14,7 @@ export default function GroupShowAll() {
         if (!router.isReady) return;
 
         async function fetchGroupNames() {
-            const data = await supabase.from("groups").select("name, created_at").eq("created_by", router.query.username);
+            const data = await supabase.from("groups").select("name, description, created_at").eq("created_by", router.query.username);
             if (data.data) {
                 // @ts-ignore
                 console.log(data.data[0])

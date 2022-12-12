@@ -14,54 +14,29 @@ import {
 import {IconDots, IconMessages, IconNote, IconPencil, IconReportAnalytics, IconTrash} from "@tabler/icons";
 import React, {useState} from "react";
 import router, {useRouter} from "next/router";
+import {useSupabaseClient} from "@supabase/auth-helpers-react";
+import {Database} from "../../utils/database.types";
 
 
-export default function CreateByGroupName({GroupData}: { GroupData: { name: string, created_at: string } }) {
-    let router=useRouter();
-    const [data, setData] = useState([
-        {
-            "avatar": "https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
-            "email": "rob_wolf@gmail.com",
-            "job": "Engineer",
-            "name": "Robert Wolfkisser",
-            rate: 22
-        },
-        {
-            "avatar": "https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
-            "email": "rob_wolf@gmail.com",
-            "job": "Engineer",
-            "name": "Robert Wolfkisser",
-            rate: 22
-        }
-    ] as { avatar: string; name: string; job: string; email: string; rate: number }[]);
+export default function CreateByGroupName({GroupData}: { GroupData: { name: string, descption: string, created_at: string } }) {
+    let router = useRouter();
+    const [data, setData] = useState([] as { member_name: string; role: string }[]);
 
 
     const rows = data.map((item) => (
-        <tr style={{backgroundColor: "#eeeeee"}} key={item.name}>
+        <tr style={{backgroundColor: "#eeeeee"}} key={item.member_name}>
             <td>
                 <Group spacing="sm">
-                    <Avatar size={40} src={item.avatar} radius={40}/>
+                    <Avatar size={40} radius={40}/>
                     <div>
                         <Text size="sm" weight={500}>
-                            {item.name}
+                            {item.member_name}
                         </Text>
                         <Text color="dimmed" size="xs">
-                            {item.job}
+                            {item.role}
                         </Text>
                     </div>
                 </Group>
-            </td>
-            <td>
-                <Text size="sm">{item.email}</Text>
-                <Text size="xs" color="dimmed">
-                    Email
-                </Text>
-            </td>
-            <td>
-                <Text size="sm">${item.rate.toFixed(1)} / hr</Text>
-                <Text size="xs" color="dimmed">
-                    Rate
-                </Text>
             </td>
             <td>
                 <Group spacing={0} position="right">
@@ -89,22 +64,31 @@ export default function CreateByGroupName({GroupData}: { GroupData: { name: stri
     ));
 
     const [opened, setOpened] = useState(false);
+    const supabase = useSupabaseClient<Database>();
+    const fetchGroupMembers = async () => {
+        const data = await supabase.from("group_members").select("*").eq("group_name", GroupData.name);
+        console.log(data.data);
+        if (data.data) {
+            // @ts-ignore
+            setData(data.data);
+        }
+        setOpened(!opened);
+    }
 
     return (
         <Container>
             <Flex justify={"space-between"} pt={"xs"}>
                 <Group>
-                    <Text >{GroupData.name}</Text>
-                    <Text size={"sm"} color={"dimmed"}>{GroupData?.created_at.split("T")[0]}</Text>
+                    <Text>{GroupData.name}</Text>
+                    <Text size={"xs"} color={"dimmed"}>{GroupData?.created_at.split("T")[0]}</Text>
                 </Group>
+                <Text size={"xs"} color={"dimmed"}>{GroupData.descption}</Text>
                 <Group pb={"xs"}>
-                    <Button variant={"outline"} style={{maxWidth: 100}} onClick={()=>{
+                    <Button variant={"outline"} style={{maxWidth: 100}} onClick={() => {
                         router.push(`/${router.query.username}/${router.query.project}/quiz/${GroupData.name}`)
                     }
                     }>Quiz</Button>
-                    <Button style={{maxWidth: 100}} onClick={() => {
-                        setOpened(!opened)
-                    }}>Show</Button>
+                    <Button style={{maxWidth: 100}} onClick={fetchGroupMembers}>Show</Button>
                 </Group>
 
             </Flex>
