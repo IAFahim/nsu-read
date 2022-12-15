@@ -1,6 +1,6 @@
 import {Database} from "../../utils/database.types";
 import {Group, Text} from "@mantine/core";
-import router from "next/router";
+import router, {useRouter} from "next/router";
 import useProfile from "../../store/UseProfile";
 import {useEffect, useRef, useState} from "react";
 import {useSupabaseClient} from "@supabase/auth-helpers-react";
@@ -13,12 +13,15 @@ export default function ProjectLists() {
     const profile = useProfile(state => state.profiles);
     const lock = useRef(true);
     const [projectList, setProjectList] = useState([] as Project[]);
+    const router = useRouter();
 
     useEffect(() => {
+        if (!router.isReady) return;
+
         async function fetchProfile() {
             if (lock.current) {
                 lock.current = false;
-                const project = await supabase.from("projects").select("*").eq("created_by", profile?.username);
+                const project = await supabase.from("projects").select("*").eq("created_by", router.query.username? router.query.username: profile?.username );
                 if (project.data) {
                     setProjectList(project.data);
                 }
@@ -26,10 +29,9 @@ export default function ProjectLists() {
             }
         }
 
+        fetchProfile();
 
-            fetchProfile();
-
-    }, [])
+    }, [router.isReady])
 
     const list = projectList.map(p => {
         return (

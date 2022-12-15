@@ -1,6 +1,6 @@
 import RecordAudio from "../Audio/RecordAudio";
 
-export default function Quiz() {
+export default function OnGoingQuiz() {
     return (
         <>
             <div>No On-going Quiz</div>

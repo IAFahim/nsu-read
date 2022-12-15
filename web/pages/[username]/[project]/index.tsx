@@ -2,7 +2,7 @@ import {Group, Menu, Tabs} from "@mantine/core";
 import {IconEdit, IconEye, IconGraph, IconTestPipe, IconTextPlus, IconUser} from "@tabler/icons";
 import Read from "../../../components/Read/Read";
 import GroupShowAll from "../../../components/Group/GroupShowAll";
-import Quiz from "../../../components/Quiz/Quiz";
+import OnGoingQuiz from "../../../components/Quiz/OnGoingQuiz";
 
 function TopTab() {
     return (
@@ -10,7 +10,7 @@ function TopTab() {
             <Tabs.List>
                 <Tabs.Tab icon={<IconTextPlus size={14}/>} value="Read">Read</Tabs.Tab>
                 <Tabs.Tab icon={<IconUser size={14}/>} value="Group">Group</Tabs.Tab>
-                <Tabs.Tab icon={<IconTestPipe size={14}/>} value={"Quiz"}>Quiz</Tabs.Tab>
+                <Tabs.Tab icon={<IconTestPipe size={14}/>} value={"OnGoingQuiz"}>Quiz</Tabs.Tab>
                 <Tabs.Tab icon={<IconGraph size={14}/>} value="Statistic">Statistic</Tabs.Tab>
             </Tabs.List>
             <Tabs.Panel value={"Read"}>
@@ -20,8 +20,8 @@ function TopTab() {
                 <GroupShowAll/>
             </Tabs.Panel>
 
-            <Tabs.Panel value={"Quiz"}>
-                <Quiz/>
+            <Tabs.Panel value={"OnGoingQuiz"}>
+                <OnGoingQuiz/>
             </Tabs.Panel>
         </Tabs>
     );

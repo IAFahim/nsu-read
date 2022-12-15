@@ -6,6 +6,7 @@ import SetUserName from "../../components/Profile/SetUserName";
 import Profile from "../../components/Profile/Profile";
 import useProfile from "../../store/UseProfile";
 import {Box, Overlay} from "@mantine/core";
+import {PostgrestSingleResponse} from "@supabase/supabase-js";
 
 type Profiles = Database['public']['Tables']['users']['Row']
 
@@ -21,10 +22,18 @@ export default function Account() {
 
 
     useEffect(() => {
+        if (!router.isReady) return;
+
         async function fetchProfile() {
             if (lock.current) {
                 lock.current = false;
-                const data = await supabase.from("users").select("*").eq("id", session?.user?.id).single()
+                console.log(router.query.username !== undefined, router.query.username, profile?.username)
+                let data = null as PostgrestSingleResponse<any> | null;
+                if (router.query.username !== undefined && router.query.username !== profile?.username) {
+                    data = await supabase.from("users").select("*").eq("username", router.query.username).single();
+                } else {
+                    data = await supabase.from("users").select("*").eq("id", session?.user?.id).single()
+                }
                 if (data.data) {
                     SetProfile(data.data)
                 }
@@ -33,7 +42,7 @@ export default function Account() {
         }
 
         fetchProfile();
-    }, [session])
+    }, [session, router.isReady])
 
     return (
         <>

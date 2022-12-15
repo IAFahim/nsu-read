@@ -17,8 +17,6 @@ import router from 'next/router';
 import {IconChevronDown} from "@tabler/icons";
 import CreateNew from "../Button/CreateNew";
 import {Database} from "../../utils/database.types";
-import {useSupabaseClient} from "@supabase/auth-helpers-react";
-import {placeholder, PLACEHOLDERS_ALIAS} from "@babel/types";
 import {jsx} from "@emotion/react";
 import IntrinsicAttributes = jsx.JSX.IntrinsicAttributes;
 import ProjectLists from "../Projects/ProjectLists";
