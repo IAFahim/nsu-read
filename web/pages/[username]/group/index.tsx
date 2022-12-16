@@ -146,7 +146,7 @@ export default function ManageGroup() {
     }, [router.isReady]);
 
     const createGroup = async () => {
-        // console.log(newGroupName.current.value, newGroupDescription)
+
         const {data, error} = await supabase
             .from('groups')
             .insert([
@@ -159,13 +159,22 @@ export default function ManageGroup() {
         if (error) {
             console.log(error);
         } else {
-            console.log(data);
+            let userlist = selectedMembers.map((value, index)=>{
+                return {
+                    created_by: profile?.username,
+                    group_name: newGroupName.current.value,
+                    member_name: value,
+                    role: "student"
+                }
+            })
+            const users = await supabase.from("group_members").insert(userlist);
         }
+
     }
 
     const [value, setValue] = useState<string | null>(null);
     const ref = useRef<HTMLInputElement>(null);
-    const [selected, setSelected] = useState<string[]>([]);
+    const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
 
     return (
         <Container>
@@ -184,8 +193,8 @@ export default function ManageGroup() {
                     itemComponent={SelectItem}
                     style={{flexGrow: 1}}
                     data={group_members}
-                    value={selected}
-                    onChange={setSelected}
+                    value={selectedMembers}
+                    onChange={setSelectedMembers}
                     searchable
                     clearable
                     nothingFound="Nobody here"
@@ -196,10 +205,6 @@ export default function ManageGroup() {
                             item.description.toLowerCase().includes(value.toLowerCase().trim()))
                     }
                 />
-
-                <Button mt={"xl"} onClick={() => {
-                    console.log(selected)
-                }}>Add</Button>
             </Group>
 
             <Title mt={"xl"}>Edit</Title>
@@ -207,9 +212,10 @@ export default function ManageGroup() {
             <Flex justify={"space-between"}>
                 <Select
                     placeholder="Your Groups"
-                    value={value}
-                    itemComponent={SelectItem}
+                    // itemComponent={SelectItem}
                     data={usersGroupList}
+                    value={value}
+                    onChange={setValue}
                     searchable
                     style={{flexGrow: 1}}
 
@@ -219,7 +225,7 @@ export default function ManageGroup() {
                         return item.label != null && item.label.toLowerCase().includes(value.toLowerCase().trim());
                     }}
                 />
-                <Button ml={"xs"} mr={"xl"} onClick={() => {
+                <Button ml={"xs"} mr={"xl"} onClick={async () => {
 
                 }
                 }>Add</Button>

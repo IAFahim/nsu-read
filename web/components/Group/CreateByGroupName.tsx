@@ -18,7 +18,7 @@ import {useSupabaseClient} from "@supabase/auth-helpers-react";
 import {Database} from "../../utils/database.types";
 
 
-export default function CreateByGroupName({GroupData}: { GroupData: { name: string, descption: string, created_at: string } }) {
+export default function CreateByGroupName({GroupData}: { GroupData: { group_name: string } }) {
     let router = useRouter();
     const [data, setData] = useState([] as { member_name: string; role: string }[]);
 
@@ -46,7 +46,7 @@ export default function CreateByGroupName({GroupData}: { GroupData: { name: stri
     const [opened, setOpened] = useState(false);
     const supabase = useSupabaseClient<Database>();
     const fetchGroupMembers = async () => {
-        const data = await supabase.from("group_members").select("*").eq("group_name", GroupData.name);
+        const data = await supabase.from("group_members").select("*").eq("group_name", GroupData.group_name);
         console.log(data.data);
         if (data.data) {
             // @ts-ignore
@@ -56,16 +56,14 @@ export default function CreateByGroupName({GroupData}: { GroupData: { name: stri
     }
 
     return (
-        <Container>
+        <>
             <Flex justify={"space-between"} pt={"xs"}>
                 <Group>
-                    <Text>{GroupData.name}</Text>
-                    <Text size={"xs"} color={"dimmed"}>{GroupData?.created_at.split("T")[0]}</Text>
+                    <Text>{GroupData.group_name}</Text>
                 </Group>
-                <Text size={"xs"} color={"dimmed"}>{GroupData.descption}</Text>
                 <Group pb={"xs"}>
                     <Button variant={"outline"} style={{maxWidth: 100}} onClick={() => {
-                        router.push(`/${router.query.username}/${router.query.project}/quiz/${GroupData.name}`)
+                        router.push(`/${router.query.username}/${router.query.project}/quiz/${GroupData.group_name}`)
                     }
                     }>Quiz</Button>
                     <Button style={{maxWidth: 100}} onClick={fetchGroupMembers}>Show</Button>
@@ -81,6 +79,6 @@ export default function CreateByGroupName({GroupData}: { GroupData: { name: stri
                     </ScrollArea>
                 </Container>
             </Collapse>
-        </Container>
+        </>
     );
 }
