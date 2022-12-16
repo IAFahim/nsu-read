@@ -90,6 +90,16 @@ export interface Database {
                     role: string
                 }
             }
+            pdf_position:{
+                Row: {
+                    tick: number
+                    created_by: string
+                    project_name: string
+                    reader: string
+                    x: number
+                    y: number
+                }
+            }
         }
         storage:{}
         Views: {
