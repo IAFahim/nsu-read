@@ -143,7 +143,7 @@ function Read() {
                     height: 10,
                     backgroundColor: "#" + Math.floor(Math.random() * 16777215).toString(16),
                     zIndex: 500,
-                    opacity: 0.5
+                    opacity: 0.3
                 }}>
 
                 </div>
