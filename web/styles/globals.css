@@ -41,7 +41,7 @@
     justify-content: space-between;
 }
 
-button {
+.bto {
     width: 100%;
     font-size: 16px;
     color: #ffffff;
@@ -63,14 +63,14 @@ button {
     background-color: #ff3333;
 }
 
-button:hover {
+.bto:hover {
     background-color: #555e7d;
 }
 
-button:focus {
+.bto:focus {
     outline: none;
 }
 
-button svg {
+.bto svg {
     margin-right: 5px;
 }
