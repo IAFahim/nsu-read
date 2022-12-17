@@ -63,9 +63,9 @@ export default function CreateByGroupName({GroupData}: { GroupData: { group_name
                 </Group>
                 <Group pb={"xs"}>
                     <Button variant={"outline"} style={{maxWidth: 100}} onClick={() => {
-                        router.push(`/${router.query.username}/${router.query.project}/quiz/${GroupData.group_name}`)
+                        router.push(`/${router.query.username}/${router.query.project}/quiz/${GroupData.group_name}/create`)
                     }
-                    }>Quiz</Button>
+                    }>Set Quiz</Button>
                     <Button style={{maxWidth: 100}} onClick={fetchGroupMembers}>Show</Button>
                 </Group>
 

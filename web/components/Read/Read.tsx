@@ -15,7 +15,6 @@ import router, {useRouter} from "next/router";
 import useURL from "../../store/UseURL";
 import {pageNavigationPlugin, RenderCurrentPageLabelProps} from '@react-pdf-viewer/page-navigation';
 import CreateByGroupName from "../Group/CreateByGroupName";
-import {useMouse, useWindowScroll} from "@mantine/hooks";
 
 function Read() {
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
@@ -158,7 +157,9 @@ function Read() {
         <>
             {dots()}
             <Button mt={2} style={{position: "absolute", right: 10}} variant="default"
-                    rightIcon={<IconEdit size={14}/>}>Edit</Button>
+                    rightIcon={<IconEdit size={14}/>} onClick={() => {
+
+            }}>Show Stats</Button>
 
             <CurrentPageLabel>
                 {(props: RenderCurrentPageLabelProps) => (

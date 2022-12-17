@@ -100,6 +100,19 @@ export interface Database {
                     y: number
                 }
             }
+            questions: {
+                Row: {
+                    id: number
+                    created_by: string
+                    project_name: string
+                    group_name: string
+                    question: string
+                    answer: string
+                    type: string
+                    created_at: string
+                    updated_at: string | null
+                }
+            }
         }
         storage:{}
         Views: {
