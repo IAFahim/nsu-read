@@ -6,7 +6,7 @@ import {Viewer} from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import {defaultLayoutPlugin} from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
-import {Button, Container, Group} from "@mantine/core";
+import {Button, Container, Group, Tooltip} from "@mantine/core";
 import {IconEdit} from "@tabler/icons";
 import {Database} from "../../utils/database.types";
 import {useSupabaseClient} from "@supabase/auth-helpers-react";
@@ -119,13 +119,14 @@ function Read() {
         const [dataset, setDataset] = useState<any[]>([]);
         useEffect(() => {
             if (!router.isReady) return;
+
             async function get() {
                 const {
                     data,
                     error
                 } = await supabase.from('pdf_position').select('reader, x,y').eq('project_name', router.query.project).eq('created_by', router.query.username)
                 if (data) {
-                    console.log("TrackData:" , data)
+                    console.log("TrackData:", data)
                     setDataset(data);
                 }
             }
@@ -135,18 +136,20 @@ function Read() {
 
         return dataset.map((item, index) => {
             return (
-                <div key={index} style={{
-                    position: "absolute",
-                    top: item.y,
-                    left: item.x,
-                    width: 40,
-                    height: 10,
-                    backgroundColor: "#" + Math.floor(Math.random() * 16777215).toString(16),
-                    zIndex: 500,
-                    opacity: 0.3
-                }}>
+                <Tooltip label={item.reader}>
+                    <div key={index} style={{
+                        position: "absolute",
+                        top: item.y,
+                        left: item.x,
+                        width: 40,
+                        height: 10,
+                        backgroundColor: "#" + Math.floor(Math.random() * 16777215).toString(16),
+                        zIndex: 500,
+                        opacity: 0.3
+                    }}>
 
-                </div>
+                    </div>
+                </Tooltip>
             )
         })
     }
