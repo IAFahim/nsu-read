@@ -31,7 +31,7 @@ function Read() {
             console.log(router.query.username + "/" + router.query.project + "/");
 
             const data = await supabase.storage.from('pdf')
-                .upload(`${router.query.username}/${router.query.projectview}/${selectedFile.name}`, selectedFile,
+                .upload(`${router.query.username}/${router.query.project}/${selectedFile.name}`, selectedFile,
                     {
                         cacheControl: '3600',
                         upsert: true,
@@ -45,12 +45,10 @@ function Read() {
             reader.readAsDataURL(selectedFile);
 
             reader.onloadend = (e) => {
-                // @ts-ignore
-                setPdfFile(e.target.result);
+                router.reload();
             }
         } else {
-            // @ts-ignore
-            setPdfFile('');
+
         }
     }
 
@@ -71,6 +69,7 @@ function Read() {
             if (data && data.length > 0) {
                 console.log(data[0]);
             }
+            console.log("PDF status",data,error);
 
             if (data && data.length > 0) {
                 const fileLink = supabase.storage.from('pdf').getPublicUrl(`${router.query.username}/${router.query.project}/${data[0].name}`);

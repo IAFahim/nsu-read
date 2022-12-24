@@ -54,16 +54,17 @@ function ProjectList(props: { project: Project }) {
     console.log(props.project)
     return (
         <div>
-            <Group noWrap onClick={() => {
+            <Group style={{backgroundColor:"aliceblue", borderRadius:"10px", padding:"10px", margin:"10px"}}
+                noWrap onClick={() => {
                 router.push(`${props.project.created_by}/${props.project.name}`)
             }
             }>
-                <Text>{props.project.name}</Text>
+                <Text size={"xl"} style={{width:100}}>{props.project.name}</Text>
                 <div>
-                    <Text>{props.project.description}</Text>
                     <Text size="xs" color="dimmed">
                         {props.project.type}
                     </Text>
+                    <Text>{props.project.description}</Text>
                 </div>
             </Group>
         </div>
