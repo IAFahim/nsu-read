@@ -1,8 +1,9 @@
-import {Avatar,Overlay, Flex, Title, Text, Grid, Container, Image, createStyles, Divider} from "@mantine/core";
+import {Avatar, Overlay, Flex, Title, Text, Grid, Container, Image, createStyles, Divider, Button} from "@mantine/core";
 import {Database} from "../../utils/database.types";
 import {IconCone, IconUser} from "@tabler/icons";
 import ProfileLists from "./ProfileLists";
 import {useTheme} from "@emotion/react";
+import {useState} from "react";
 
 type Profiles = Database['public']['Tables']['users']['Row']
 const useStyles = createStyles((theme) => ({
@@ -37,6 +38,8 @@ const useStyles = createStyles((theme) => ({
 }));
 export default function Profile({profile}: { profile: Profiles }) {
     const {classes, theme} = useStyles();
+
+    const [sync, setSync] = useState(false);
     return (
         <>
             <Flex pt={"sm"} className={classes.ProfileContainer} gap={"xl"}>
@@ -46,6 +49,14 @@ export default function Profile({profile}: { profile: Profiles }) {
                     <Flex direction={"column"}>
                         <Title>{profile?.username}</Title>
                         <Text size={"sm"} color={"dimmed"}>{profile?.full_name}</Text>
+                        <Button mt={"sm"} color={"blue"} variant={"outline"} onClick={
+                            () => {
+                                setSync(!sync);
+                            }
+                        }>Sync Phone</Button>
+                        {
+                            sync && <Image src={`https://image-charts.com/chart?chs=150x150&cht=qr&chl=${profile.id}`}></Image>
+                        }
                     </Flex>
                 </Flex>
                 <ProfileLists/>
