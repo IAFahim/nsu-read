@@ -13,7 +13,6 @@ const Login = () => {
                     appearance={{theme: ThemeSupa}}
                     magicLink={true}
                     providers={['google']}
-                    redirectTo={"http://localhost:3000"}
                 />
             </Container>
         </div>
