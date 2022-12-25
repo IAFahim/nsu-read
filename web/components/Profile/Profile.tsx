@@ -55,7 +55,7 @@ export default function Profile({profile}: { profile: Profiles }) {
                             }
                         }>Sync Phone</Button>
                         {
-                            sync && <Image src={`https://image-charts.com/chart?chs=150x150&cht=qr&chl=${profile.id}`}></Image>
+                            sync && <Image src={`https://image-charts.com/chart?chs=150x150&cht=qr&chl=${profile.username}`}></Image>
                         }
                     </Flex>
                 </Flex>
